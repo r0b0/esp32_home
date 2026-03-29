@@ -29,6 +29,8 @@
 // Install the "HttpClient" library by Adrian McEwen
 #include <HTTPClient.h>
 
+#include "app.h"
+
 // Touchscreen pins
 #define XPT2046_IRQ 36   // T_IRQ
 #define XPT2046_MOSI 32  // T_DIN
@@ -54,6 +56,9 @@ void log_print(lv_log_level_t level, const char * buf) {
   Serial.println(buf);
   Serial.flush();
 }
+
+// Main app
+struct AppStruct app;
 
 // Get the Touchscreen data
 void touchscreen_read(lv_indev_t * indev, lv_indev_data_t * data) {
@@ -86,64 +91,71 @@ void touchscreen_read(lv_indev_t * indev, lv_indev_data_t * data) {
   }
 }
 
-int btn1_count = 0;
-// Callback that is triggered when btn1 is clicked
-static void event_handler_btn1(lv_event_t * e) {
-  lv_event_code_t code = lv_event_get_code(e);
-  if(code == LV_EVENT_CLICKED) {
-    btn1_count++;
-    LV_LOG_USER("Button clicked %d", (int)btn1_count);
-  }
+static void event_handler_screen_load_btn(lv_event_t * e) {
+  lv_screen_load_anim((lv_obj_t *)e->user_data, LV_SCREEN_LOAD_ANIM_OVER_LEFT, 200, 100, false);
 }
 
-// Callback that is triggered when btn2 is clicked/toggled
-static void event_handler_btn2(lv_event_t * e) {
-  lv_event_code_t code = lv_event_get_code(e);
-  lv_obj_t * obj = (lv_obj_t*) lv_event_get_target(e);
-  if(code == LV_EVENT_VALUE_CHANGED) {
-    LV_UNUSED(obj);
-    LV_LOG_USER("Toggled %s", lv_obj_has_state(obj, LV_STATE_CHECKED) ? "on" : "off");
-  }
+static void event_handler_back_btn(lv_event_t *e) {
+  lv_screen_load_anim(app.main_screen, LV_SCREEN_LOAD_ANIM_OVER_RIGHT, 200, 100, false);
+}
+
+static void event_handler_radio_command(lv_event_t *e) {
+  String command = String((char *)e->user_data);
+  String player = "pi.lamac.cc%3A6600"; // TODO
+  String radio = "http%3A%2F%2Fstream.radioparadise.com%2Faac-320"; // TODO
+  HTTPClient http;
+  http.begin("https://radio.lamac.cc/command");
+  http.addHeader("Content-Type", "application/x-www-form-urlencoded");
+  String data = "player="+ player + "&radio=" + radio + "&" + command + "=";
+  LV_LOG_USER("Posting %s to MPD", data);
+  int httpCode = http.POST(data);
+  LV_LOG_USER("Play post return code %d", httpCode);
 }
 
 void lv_create_main_gui(void) {
-  // Create a text label aligned center on top ("Hello, world!")
-  lv_obj_t * text_label = lv_label_create(lv_screen_active());
-  lv_label_set_long_mode(text_label, LV_LABEL_LONG_WRAP);    // Breaks the long lines
-  char *btn_text;
-  if(WiFi.status() == WL_CONNECTED) {
-    btn_text = "\uf1eb Wifi Connected";
-  } else {
-    btn_text = "\uf00d Wifi Not Connected";
-  }
-  lv_label_set_text(text_label, btn_text);
-  lv_obj_set_width(text_label, 150);    // Set smaller width to make the lines wrap
-  lv_obj_set_style_text_align(text_label, LV_TEXT_ALIGN_CENTER, 0);
-  lv_obj_align(text_label, LV_ALIGN_CENTER, 0, -90);
+  // TODO standardize the screens
+  // https://medium.com/@akimik/let-item-fill-available-space-in-lvgl-flex-64e0f9e32c9b
+  app.main_screen = lv_obj_create(NULL);
+  lv_obj_set_flex_flow(app.main_screen, LV_FLEX_FLOW_COLUMN);
+  app.radio_screen = lv_obj_create(NULL);
+  lv_obj_set_flex_flow(app.radio_screen, LV_FLEX_FLOW_COLUMN);
+  lv_screen_load(app.main_screen);
 
-  lv_obj_t * btn_label;
-  // Create a Button (btn1)
-  lv_obj_t * btn1 = lv_button_create(lv_screen_active());
-  lv_obj_add_event_cb(btn1, event_handler_btn1, LV_EVENT_ALL, NULL);
-  lv_obj_align(btn1, LV_ALIGN_CENTER, 0, -50);
-  lv_obj_remove_flag(btn1, LV_OBJ_FLAG_PRESS_LOCK);
+  lv_obj_t *wifi_conn_label = lv_label_create(app.main_screen);
+  lv_label_set_long_mode(wifi_conn_label, LV_LABEL_LONG_WRAP);    // Breaks the long lines
+  lv_label_set_text(wifi_conn_label, WiFi.status() == WL_CONNECTED ? LV_SYMBOL_WIFI "Wifi Connected" : LV_SYMBOL_CLOSE "Wifi Not Connected");
+  lv_obj_set_width(wifi_conn_label, LV_PCT(100));
+  // lv_obj_set_style_text_align(wifi_conn_label, LV_TEXT_ALIGN_CENTER, 0);
+  // lv_obj_align(wifi_conn_label, LV_ALIGN_CENTER, 0, -90);
 
-  btn_label = lv_label_create(btn1);
-  lv_label_set_text(btn_label, "Button");
-  lv_obj_center(btn_label);
+  lv_obj_t *radio_btn = make_btn(app.main_screen, LV_SYMBOL_AUDIO " Radio");
+  lv_obj_add_event_cb(radio_btn, event_handler_screen_load_btn, LV_EVENT_CLICKED, app.radio_screen);
 
-  // Create a Toggle button (btn2)
-  lv_obj_t * btn2 = lv_button_create(lv_screen_active());
-  lv_obj_add_event_cb(btn2, event_handler_btn2, LV_EVENT_ALL, NULL);
-  lv_obj_align(btn2, LV_ALIGN_CENTER, 0, 10);
-  lv_obj_add_flag(btn2, LV_OBJ_FLAG_CHECKABLE);
-  lv_obj_set_height(btn2, LV_SIZE_CONTENT);
+  app.radio_status_label = lv_label_create(app.radio_screen);
+  lv_label_set_long_mode(app.radio_status_label, LV_LABEL_LONG_MODE_SCROLL);
+  lv_label_set_text(app.radio_status_label, "Loading...");
+  lv_obj_set_width(wifi_conn_label, LV_PCT(100));
+  // lv_obj_set_style_text_align(app.radio_status_label, LV_TEXT_ALIGN_CENTER, 0);
+  // lv_obj_align(app.radio_status_label, LV_ALIGN_CENTER, 0, -90);
 
-  btn_label = lv_label_create(btn2);
-  lv_label_set_text(btn_label, "Toggle");
-  lv_obj_center(btn_label);
+  lv_obj_t *play_btn = make_btn(app.radio_screen, LV_SYMBOL_PLAY " Play");
+  lv_obj_add_event_cb(play_btn, event_handler_radio_command, LV_EVENT_CLICKED, (void *)"play");
 
-  fetchStatus(btn_label);
+  lv_obj_t *stop_btn = make_btn(app.radio_screen, LV_SYMBOL_STOP " Stop");
+  lv_obj_add_event_cb(stop_btn, event_handler_radio_command, LV_EVENT_CLICKED, (void *)"stop");
+
+  lv_obj_t *back_btn = make_btn(app.radio_screen, LV_SYMBOL_LEFT " Back");
+  lv_obj_add_event_cb(back_btn, event_handler_back_btn, LV_EVENT_CLICKED, NULL);
+}
+
+lv_obj_t *make_btn(lv_obj_t *parent, const char *text) {
+  lv_obj_t *b = lv_button_create(parent);
+  lv_obj_set_width(b, LV_PCT(100));
+  lv_obj_remove_flag(b, LV_OBJ_FLAG_PRESS_LOCK);
+  lv_obj_t *label = lv_label_create(b);
+  lv_label_set_text(label, text);
+  lv_obj_center(label);
+  return b;
 }
 
 void connectToWifi() {
@@ -154,20 +166,28 @@ void connectToWifi() {
   }
 }
 
-void fetchStatus(lv_obj_t *gui) {
+void fetchRadioStatus() {
+  if(lv_screen_active() != app.radio_screen) {
+    LV_LOG_USER("Not fetching radio status, not on the radio page");
+    return;
+  }
+
   HTTPClient http;
   http.begin("https://radio.lamac.cc/status?player=pi.lamac.cc:6600");
   int httpCode = http.GET();
   if (httpCode == 200) {
     String payload = http.getString();
     payload.trim();
+    if(payload.startsWith("<span")) {
+      payload = payload.substring(32);
+      payload.trim();
+    }
     String status = payload.substring(0, payload.indexOf("<"));
     LV_LOG_USER("http call success %s", status.c_str());
     if(status.length()>50) {
       status = status.substring(0, 50);
     }
-    lv_label_set_text(gui, status.c_str());
-    lv_obj_center(gui);
+    lv_label_set_text(app.radio_status_label, status.c_str());
   } else {
     LV_LOG_USER("http call failed %d", httpCode);
   }
@@ -208,10 +228,17 @@ void setup() {
 
   // Function to draw the GUI (text, buttons and sliders)
   lv_create_main_gui();
+  app.ticker = millis();
 }
 
 void loop() {
   lv_task_handler();  // let the GUI do its work
   lv_tick_inc(5);     // tell LVGL how much time has passed
   delay(5);           // let this time pass
+
+  if(millis() > app.ticker + 10000) {
+    LV_LOG_USER("tick %d", app.ticker);
+    app.ticker = millis();
+    fetchRadioStatus();
+  }
 }
