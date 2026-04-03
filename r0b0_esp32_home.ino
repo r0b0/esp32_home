@@ -1,13 +1,3 @@
-/*  Rui Santos & Sara Santos - Random Nerd Tutorials
-    THIS EXAMPLE WAS TESTED WITH THE FOLLOWING HARDWARE:
-    1) ESP32-2432S028R 2.8 inch 240×320 also known as the Cheap Yellow Display (CYD): https://makeradvisor.com/tools/cyd-cheap-yellow-display-esp32-2432s028r/
-      SET UP INSTRUCTIONS: https://RandomNerdTutorials.com/cyd-lvgl/
-    2) REGULAR ESP32 Dev Board + 2.8 inch 240x320 TFT Display: https://makeradvisor.com/tools/2-8-inch-ili9341-tft-240x320/ and https://makeradvisor.com/tools/esp32-dev-board-wi-fi-bluetooth/
-      SET UP INSTRUCTIONS: https://RandomNerdTutorials.com/esp32-tft-lvgl/
-    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files.
-    The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 /*  Install the "lvgl" library version 9.2 by kisvegabor to interface with the TFT Display - https://lvgl.io/
     *** IMPORTANT: lv_conf.h available on the internet will probably NOT work with the examples available at Random Nerd Tutorials ***
     *** YOU MUST USE THE lv_conf.h FILE PROVIDED IN THE LINK BELOW IN ORDER TO USE THE EXAMPLES FROM RANDOM NERD TUTORIALS ***
@@ -30,6 +20,7 @@
 #include <HTTPClient.h>
 
 #include "app.h"
+#include "radio.h"
 
 // Touchscreen pins
 #define XPT2046_IRQ 36   // T_IRQ
@@ -99,19 +90,6 @@ static void event_handler_back_btn(lv_event_t *e) {
   lv_screen_load_anim(app.main_screen, LV_SCREEN_LOAD_ANIM_OVER_RIGHT, 200, 100, false);
 }
 
-static void event_handler_radio_command(lv_event_t *e) {
-  String command = String((char *)e->user_data);
-  String player = "pi.lamac.cc%3A6600"; // TODO
-  String radio = "http%3A%2F%2Fstream.radioparadise.com%2Faac-320"; // TODO
-  HTTPClient http;
-  http.begin("https://radio.lamac.cc/command");
-  http.addHeader("Content-Type", "application/x-www-form-urlencoded");
-  String data = "player="+ player + "&radio=" + radio + "&" + command + "=";
-  LV_LOG_USER("Posting %s to MPD", data);
-  int httpCode = http.POST(data);
-  LV_LOG_USER("Play post return code %d", httpCode);
-}
-
 void lv_create_main_gui(void) {
   // TODO standardize the screens
   // https://medium.com/@akimik/let-item-fill-available-space-in-lvgl-flex-64e0f9e32c9b
@@ -166,33 +144,7 @@ void connectToWifi() {
   }
 }
 
-void fetchRadioStatus() {
-  if(lv_screen_active() != app.radio_screen) {
-    LV_LOG_USER("Not fetching radio status, not on the radio page");
-    return;
-  }
 
-  HTTPClient http;
-  http.begin("https://radio.lamac.cc/status?player=pi.lamac.cc:6600");
-  int httpCode = http.GET();
-  if (httpCode == 200) {
-    String payload = http.getString();
-    payload.trim();
-    if(payload.startsWith("<span")) {
-      payload = payload.substring(32);
-      payload.trim();
-    }
-    String status = payload.substring(0, payload.indexOf("<"));
-    LV_LOG_USER("http call success %s", status.c_str());
-    if(status.length()>50) {
-      status = status.substring(0, 50);
-    }
-    lv_label_set_text(app.radio_status_label, status.c_str());
-  } else {
-    LV_LOG_USER("http call failed %d", httpCode);
-  }
-  http.end();
-}
 
 void setup() {
   String LVGL_Arduino = String("LVGL Library Version: ") + lv_version_major() + "." + lv_version_minor() + "." + lv_version_patch();
