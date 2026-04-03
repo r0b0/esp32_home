@@ -17,7 +17,6 @@
 #include "wifi_creds.h"
 
 // Install the "HttpClient" library by Adrian McEwen
-#include <HTTPClient.h>
 
 #include "app.h"
 #include "radio.h"
@@ -116,6 +115,12 @@ void lv_create_main_gui(void) {
   // lv_obj_set_style_text_align(app.radio_status_label, LV_TEXT_ALIGN_CENTER, 0);
   // lv_obj_align(app.radio_status_label, LV_ALIGN_CENTER, 0, -90);
 
+  app.radio_dropdown = lv_dropdown_create(app.radio_screen);
+  const char *r = radiosDropdownChar();
+  LV_LOG_USER("Radios for dropdown: %s", r);
+  lv_dropdown_set_options(app.radio_dropdown, r);
+  lv_obj_set_width(app.radio_dropdown, LV_PCT(100));
+
   lv_obj_t *play_btn = make_btn(app.radio_screen, LV_SYMBOL_PLAY " Play");
   lv_obj_add_event_cb(play_btn, event_handler_radio_command, LV_EVENT_CLICKED, (void *)"play");
 
@@ -143,8 +148,6 @@ void connectToWifi() {
     delay(500);
   }
 }
-
-
 
 void setup() {
   String LVGL_Arduino = String("LVGL Library Version: ") + lv_version_major() + "." + lv_version_minor() + "." + lv_version_patch();
@@ -177,10 +180,17 @@ void setup() {
   lv_indev_set_type(indev, LV_INDEV_TYPE_POINTER);
   // Set the callback function to read Touchscreen input
   lv_indev_set_read_cb(indev, touchscreen_read);
+  
+  fetchRadios();
 
   // Function to draw the GUI (text, buttons and sliders)
   lv_create_main_gui();
   app.ticker = millis();
+}
+
+void loop10s() {
+  // LV_LOG_USER("tick %d", app.ticker);
+  fetchRadioStatus();
 }
 
 void loop() {
@@ -189,8 +199,7 @@ void loop() {
   delay(5);           // let this time pass
 
   if(millis() > app.ticker + 10000) {
-    LV_LOG_USER("tick %d", app.ticker);
     app.ticker = millis();
-    fetchRadioStatus();
+    loop10s();
   }
 }

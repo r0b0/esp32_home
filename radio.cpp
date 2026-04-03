@@ -5,41 +5,127 @@
 #include "app.h"
 #include "radio.h"
 
+struct RadioStruct *knownRadios=NULL;
 
 void event_handler_radio_command(lv_event_t *e) {
   String command = String((char *)e->user_data);
-  String player = "pi.lamac.cc%3A6600"; // TODO
-  String radio = "http%3A%2F%2Fstream.radioparadise.com%2Faac-320"; // TODO
+  String radio = selectedRadio();
+  String url = RADIO_URL + "command";
   HTTPClient http;
-  http.begin("https://radio.lamac.cc/command");
+  http.begin(url);
   http.addHeader("Content-Type", "application/x-www-form-urlencoded");
-  String data = "player="+ player + "&radio=" + radio + "&" + command + "=";
-  LV_LOG_USER("Posting %s to MPD", data);
+  http.addHeader("Accept", "text/plain");
+  String data = "radio=" + radio + "&" + command + "=";
+  LV_LOG_USER("Posting %s to %s", data.c_str(), url.c_str());
   int httpCode = http.POST(data);
   LV_LOG_USER("Play post return code %d", httpCode);
+  http.end();
+}
+
+void fetchRadios() {
+  String url = RADIO_URL + "radio";
+  HTTPClient http;
+  http.begin(url);
+  http.addHeader("Accept", "text/plain");
+  int httpCode = http.GET();
+  if (httpCode == 200) {
+    String radios = http.getString();
+    LV_LOG_USER("Fetched radios %s", radios.c_str());
+    knownRadios = parseRadios(radios);  // TODO: free previous values
+  } else {
+    LV_LOG_USER("http call failed %d", httpCode);
+  }
+  http.end();
+}
+
+struct RadioStruct *parseRadios(String s) {
+  s.trim();
+  // LV_LOG_USER("Parsing radios from:");
+  // LV_LOG_USER(s.c_str());
+  if(s.length() == 0) {
+    return NULL;
+  }
+  struct RadioStruct *r = (struct RadioStruct *)malloc(sizeof(struct RadioStruct));
+  int n = s.indexOf("\n");
+  String current;
+  if(n > 0) {
+    // LV_LOG_USER("Newline found at %d", n);
+    current = s.substring(0, n);
+  } else {
+    // LV_LOG_USER("Newline not found");
+    current = s;
+  }
+  // LV_LOG_USER("Current line to process:");
+  // LV_LOG_USER(current.c_str());
+  int t = current.indexOf("\t");
+  if(t < 0) {
+    // LV_LOG_USER("Tab not found");
+    return NULL;
+  }
+  // LV_LOG_USER("Tab found at %d", t);
+  String url = current.substring(0, t);
+  url.trim();
+  // TODO: check for one more tab and word "selected"
+  String name = current.substring(t);
+  name.trim();
+  r->url = (char *)malloc(url.length());
+  strcpy(r->url, url.c_str());
+  r->name = (char *)malloc(name.length());
+  strcpy(r->name, name.c_str());
+  LV_LOG_USER("Parsed url '%s' name '%s'",
+    r->url, r->name);
+
+  if(n > 0) {
+    r->next = parseRadios(s.substring(n));
+  } else {
+    r->next = NULL;
+  }
+  return r;
+}
+
+String radiosDropdown(struct RadioStruct *r) {
+  // LV_LOG_USER("checking radios dropdown");
+  if(r->next == NULL) {
+    return String(r->name);
+  }
+  return String(r->name) + String("\n") + radiosDropdown(r->next);
+}
+
+const char* radiosDropdownChar() {
+  // LV_LOG_USER("Checking radios dropdown as char*");
+  return radiosDropdown(knownRadios).c_str();
+}
+
+const char *selectedRadio() {
+  int i = lv_dropdown_get_selected(app.radio_dropdown);
+  LV_LOG_USER("Radio dropdown selected index: %d", i);
+  if(i<0) {
+    return NULL;
+  }
+  struct RadioStruct *s = knownRadios;
+  for(int j=0; j<i; j++) {
+    s = s->next;
+    if(s == NULL) {
+      return NULL;
+    }
+  }
+  LV_LOG_USER("Found radio %s", s->name);
+  return s->url;
 }
 
 void fetchRadioStatus() {
   if(lv_screen_active() != app.radio_screen) {
-    LV_LOG_USER("Not fetching radio status, not on the radio page");
+    // LV_LOG_USER("Not fetching radio status, not on the radio page");
     return;
   }
 
+  String url = RADIO_URL + "status";
   HTTPClient http;
-  http.begin("https://radio.lamac.cc/status?player=pi.lamac.cc:6600");
+  http.begin(url);
+  http.addHeader("Accept", "text/plain");
   int httpCode = http.GET();
   if (httpCode == 200) {
-    String payload = http.getString();
-    payload.trim();
-    if(payload.startsWith("<span")) {
-      payload = payload.substring(32);
-      payload.trim();
-    }
-    String status = payload.substring(0, payload.indexOf("<"));
-    LV_LOG_USER("http call success %s", status.c_str());
-    if(status.length()>50) {
-      status = status.substring(0, 50);
-    }
+    String status = http.getString();
     lv_label_set_text(app.radio_status_label, status.c_str());
   } else {
     LV_LOG_USER("http call failed %d", httpCode);
