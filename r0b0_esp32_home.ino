@@ -116,9 +116,12 @@ void lv_create_main_gui(void) {
   // lv_obj_align(app.radio_status_label, LV_ALIGN_CENTER, 0, -90);
 
   app.radio_dropdown = lv_dropdown_create(app.radio_screen);
-  const char *r = radiosDropdownChar();
-  LV_LOG_USER("Radios for dropdown: %s", r);
+  char *r = radiosDropdownChar();
+  int sri = selectedRadioIndex();
+  LV_LOG_USER("Radios for dropdown: %s selected: %d", r, sri);
   lv_dropdown_set_options(app.radio_dropdown, r);
+  // free(r); // XXX
+  lv_dropdown_set_selected(app.radio_dropdown, sri);
   lv_obj_set_width(app.radio_dropdown, LV_PCT(100));
 
   lv_obj_t *play_btn = make_btn(app.radio_screen, LV_SYMBOL_PLAY " Play");

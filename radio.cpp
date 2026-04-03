@@ -46,6 +46,7 @@ struct RadioStruct *parseRadios(String s) {
     return NULL;
   }
   struct RadioStruct *r = (struct RadioStruct *)malloc(sizeof(struct RadioStruct));
+  r->selected = false;
   int n = s.indexOf("\n");
   String current;
   if(n > 0) {
@@ -68,12 +69,20 @@ struct RadioStruct *parseRadios(String s) {
   // TODO: check for one more tab and word "selected"
   String name = current.substring(t);
   name.trim();
-  r->url = (char *)malloc(url.length());
-  strcpy(r->url, url.c_str());
-  r->name = (char *)malloc(name.length());
-  strcpy(r->name, name.c_str());
-  LV_LOG_USER("Parsed url '%s' name '%s'",
-    r->url, r->name);
+  int ts = name.indexOf("\t");
+  if(ts > 0) {
+    String selectedStr = name.substring(ts);
+    selectedStr.trim();
+    if(selectedStr.startsWith("selected")) {
+      r->selected = true;
+    }
+    name = name.substring(0, ts);
+    name.trim();
+  }
+  r->url = copyString(url);
+  r->name = copyString(name);
+  LV_LOG_USER("Parsed url '%s' name '%s' selected %d",
+    r->url, r->name, r->selected);
 
   if(n > 0) {
     r->next = parseRadios(s.substring(n));
@@ -91,9 +100,9 @@ String radiosDropdown(struct RadioStruct *r) {
   return String(r->name) + String("\n") + radiosDropdown(r->next);
 }
 
-const char* radiosDropdownChar() {
+char *radiosDropdownChar() {
   // LV_LOG_USER("Checking radios dropdown as char*");
-  return radiosDropdown(knownRadios).c_str();
+  return copyString(radiosDropdown(knownRadios));
 }
 
 const char *selectedRadio() {
@@ -111,6 +120,18 @@ const char *selectedRadio() {
   }
   LV_LOG_USER("Found radio %s", s->name);
   return s->url;
+}
+
+int selectedRadioIndex() {
+  struct RadioStruct *s = knownRadios;
+  for(int j=0;; j++) {
+    if(s->selected)
+      return j;
+    s = s->next;
+    if(s == NULL) {
+      return 0;
+    }
+  }
 }
 
 void fetchRadioStatus() {
