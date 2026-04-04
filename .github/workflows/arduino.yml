@@ -1,0 +1,23 @@
+name: Build esp32
+on:  [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v5
+    - name: Build the sketch
+      uses: arduino/compile-sketches@v1
+      with:
+        fqbn: "esp32:esp32:esp32"
+        libraries: |
+          - name: HttpClient
+            version: "2.2.0"
+          - name: TFT_eSPI
+            version: "2.5.43"
+          - name: XPT2046_Touchscreen
+            version: "1.4"
+          - name: lvgl
+            version: "9.5.0"
+        sketch-paths: |
+          - "r0b0_esp32_home"
