@@ -8,10 +8,8 @@
     *** IMPORTANT: User_Setup.h available on the internet will probably NOT work with the examples available at Random Nerd Tutorials ***
     *** YOU MUST USE THE User_Setup.h FILE PROVIDED IN THE LINK BELOW IN ORDER TO USE THE EXAMPLES FROM RANDOM NERD TUTORIALS ***
     FULL INSTRUCTIONS AVAILABLE ON HOW CONFIGURE THE LIBRARY: https://RandomNerdTutorials.com/cyd-lvgl/ or https://RandomNerdTutorials.com/esp32-tft-lvgl/   */
-#include <TFT_eSPI.h>
 
 // Install the "XPT2046_Touchscreen" library by Paul Stoffregen to use the Touchscreen - https://github.com/PaulStoffregen/XPT2046_Touchscreen - Note: this library doesn't require further configuration
-#include <XPT2046_Touchscreen.h>
 
 #include <WiFi.h>
 #include "wifi_creds.h"
@@ -21,6 +19,7 @@
 #include "app.h"
 #include "radio.h"
 #include "hw.h"
+#include "gui.h"
 
 // Main app
 struct AppStruct app;
@@ -29,16 +28,12 @@ static void event_handler_screen_load_btn(lv_event_t * e) {
   lv_screen_load_anim((lv_obj_t *)e->user_data, LV_SCREEN_LOAD_ANIM_OVER_LEFT, 200, 100, false);
 }
 
-static void event_handler_back_btn(lv_event_t *e) {
-  lv_screen_load_anim(app.main_screen, LV_SCREEN_LOAD_ANIM_OVER_RIGHT, 200, 100, false);
-}
-
-void lv_create_main_gui(void) {
+void create_main_gui(void) {
   // TODO standardize the screens
   // https://medium.com/@akimik/let-item-fill-available-space-in-lvgl-flex-64e0f9e32c9b
   app.main_screen = lv_obj_create(NULL);
   lv_obj_set_flex_flow(app.main_screen, LV_FLEX_FLOW_COLUMN);
-  app.radio_screen = make_screen("Radio");
+  app.radio_screen = gui_make_screen("Radio");
   lv_screen_load(app.main_screen);
 
   lv_obj_t *wifi_conn_label = lv_label_create(app.main_screen);
@@ -48,7 +43,7 @@ void lv_create_main_gui(void) {
   lv_obj_set_style_text_align(wifi_conn_label, LV_TEXT_ALIGN_CENTER, 0);
   lv_obj_align(wifi_conn_label, LV_ALIGN_CENTER, 0, -90);
   
-  lv_obj_t *radio_btn = make_btn(app.main_screen, LV_SYMBOL_AUDIO " Radio", LV_PALETTE_BLUE);
+  lv_obj_t *radio_btn = gui_make_btn(app.main_screen, LV_SYMBOL_AUDIO " Radio", LV_PALETTE_BLUE);
   lv_obj_add_event_cb(radio_btn, event_handler_screen_load_btn, LV_EVENT_CLICKED, app.radio_screen->screen);
   
   app.radio_status_label = lv_label_create(app.radio_screen->main_flex);
@@ -65,52 +60,11 @@ void lv_create_main_gui(void) {
   lv_dropdown_set_selected(app.radio_dropdown, sri);
   lv_obj_set_width(app.radio_dropdown, LV_PCT(100));
 
-  lv_obj_t *play_btn = make_btn(app.radio_screen->main_flex, LV_SYMBOL_PLAY " Play", LV_PALETTE_GREEN);
+  lv_obj_t *play_btn = gui_make_btn(app.radio_screen->main_flex, LV_SYMBOL_PLAY " Play", LV_PALETTE_GREEN);
   lv_obj_add_event_cb(play_btn, event_handler_radio_command, LV_EVENT_CLICKED, (void *)"play");
 
-  lv_obj_t *stop_btn = make_btn(app.radio_screen->main_flex, LV_SYMBOL_STOP " Stop", LV_PALETTE_AMBER);
+  lv_obj_t *stop_btn = gui_make_btn(app.radio_screen->main_flex, LV_SYMBOL_STOP " Stop", LV_PALETTE_AMBER);
   lv_obj_add_event_cb(stop_btn, event_handler_radio_command, LV_EVENT_CLICKED, (void *)"stop");
-
-}
-
-lv_obj_t *make_btn(lv_obj_t *parent, const char *text, lv_palette_t color) {
-  lv_obj_t *b = lv_button_create(parent);
-  // lv_obj_set_width(b, LV_PCT(100));
-  lv_obj_set_style_bg_color(b, lv_palette_main(color), 0);
-  lv_obj_remove_flag(b, LV_OBJ_FLAG_PRESS_LOCK);
-  lv_obj_t *label = lv_label_create(b);
-  lv_label_set_text(label, text);
-  lv_obj_center(label);
-  return b;
-}
-
-struct AppScreen *make_screen(const char *name) {
-  struct AppScreen *screen = (struct AppScreen *)malloc(sizeof(struct AppScreen));
-
-  screen->screen = lv_obj_create(NULL);
-  lv_obj_set_layout(screen->screen, LV_LAYOUT_FLEX);
-  lv_obj_set_flex_flow(screen->screen, LV_FLEX_FLOW_COLUMN);
-  lv_obj_set_size(screen->screen, LV_PCT(100), LV_PCT(100));
-
-  lv_obj_t *top = lv_obj_create(screen->screen);
-  lv_obj_set_layout(top, LV_LAYOUT_FLEX);
-  lv_obj_set_flex_flow(top, LV_FLEX_FLOW_ROW);
-  lv_obj_set_size(top, LV_PCT(100), LV_SIZE_CONTENT);
-
-  lv_obj_t *back_btn = make_btn(top, LV_SYMBOL_LEFT " Back", LV_PALETTE_TEAL);
-  lv_obj_add_event_cb(back_btn, event_handler_back_btn, LV_EVENT_CLICKED, NULL);
-
-  lv_obj_t *label = lv_label_create(top);
-  lv_label_set_text(label, name);
-  lv_obj_set_flex_grow(label, 1);
-
-  screen->main_flex = lv_obj_create(screen->screen);
-  lv_obj_set_layout(screen->main_flex, LV_LAYOUT_FLEX);
-  lv_obj_set_flex_flow(screen->main_flex, LV_FLEX_FLOW_COLUMN);
-  lv_obj_set_width(screen->main_flex, LV_PCT(100));
-  lv_obj_set_flex_grow(screen->main_flex, 1);
-
-  return screen;
 }
 
 void connect_to_wifi() {
@@ -133,7 +87,7 @@ void setup() {
   
   fetch_radios();
 
-  lv_create_main_gui();
+  create_main_gui();
 
   app.ticker = millis();
 }
