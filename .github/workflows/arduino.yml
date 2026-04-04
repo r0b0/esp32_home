@@ -6,6 +6,14 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v5
+    - name: Customize the files
+      run: |
+        mkdir -p /home/runner/Arduino/libraries
+        cp conf_files/lv_conf.h /home/runner/Arduino/libraries/
+        mkdir -p /home/runner/Arduino/libraries/TFT_eSPI
+        cp conf_files/User_Setup.h /home/runner/Arduino/libraries/TFT_eSPI/
+        echo '#define WIFI_SSID "my-ssid"' > r0b0_esp32_home/wifi_creds.h
+        echo '#define WIFI_PWD "my-password"' >> r0b0_esp32_home/wifi_creds.h
     - name: Build the sketch
       uses: arduino/compile-sketches@v1
       with:
@@ -21,3 +29,6 @@ jobs:
             version: "9.5.0"
         sketch-paths: |
           - "r0b0_esp32_home"
+        cli-compile-flags: |
+          - "--board-options"
+          - "PartitionScheme=huge_app"
