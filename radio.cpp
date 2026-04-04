@@ -5,11 +5,11 @@
 #include "app.h"
 #include "radio.h"
 
-struct RadioStruct *knownRadios=NULL;
+struct RadioStruct *known_radios=NULL;
 
 void event_handler_radio_command(lv_event_t *e) {
   String command = String((char *)e->user_data);
-  String radio = selectedRadio();
+  String radio = selected_radio();
   String url = RADIO_URL + "command";
   HTTPClient http;
   http.begin(url);
@@ -22,7 +22,7 @@ void event_handler_radio_command(lv_event_t *e) {
   http.end();
 }
 
-void fetchRadios() {
+void fetch_radios() {
   String url = RADIO_URL + "radio";
   HTTPClient http;
   http.begin(url);
@@ -31,14 +31,14 @@ void fetchRadios() {
   if (httpCode == 200) {
     String radios = http.getString();
     LV_LOG_USER("Fetched radios %s", radios.c_str());
-    knownRadios = parseRadios(radios);  // TODO: free previous values
+    known_radios = parse_radios(radios);  // TODO: free previous values
   } else {
     LV_LOG_USER("http call failed %d", httpCode);
   }
   http.end();
 }
 
-struct RadioStruct *parseRadios(String s) {
+struct RadioStruct *parse_radios(String s) {
   s.trim();
   // LV_LOG_USER("Parsing radios from:");
   // LV_LOG_USER(s.c_str());
@@ -79,39 +79,39 @@ struct RadioStruct *parseRadios(String s) {
     name = name.substring(0, ts);
     name.trim();
   }
-  r->url = copyString(url);
-  r->name = copyString(name);
+  r->url = copy_string(url);
+  r->name = copy_string(name);
   LV_LOG_USER("Parsed url '%s' name '%s' selected %d",
     r->url, r->name, r->selected);
 
   if(n > 0) {
-    r->next = parseRadios(s.substring(n));
+    r->next = parse_radios(s.substring(n));
   } else {
     r->next = NULL;
   }
   return r;
 }
 
-String radiosDropdown(struct RadioStruct *r) {
+String radios_dropdown(struct RadioStruct *r) {
   // LV_LOG_USER("checking radios dropdown");
   if(r->next == NULL) {
     return String(r->name);
   }
-  return String(r->name) + String("\n") + radiosDropdown(r->next);
+  return String(r->name) + String("\n") + radios_dropdown(r->next);
 }
 
-char *radiosDropdownChar() {
+char *radios_dropdown_char() {
   // LV_LOG_USER("Checking radios dropdown as char*");
-  return copyString(radiosDropdown(knownRadios));
+  return copy_string(radios_dropdown(known_radios));
 }
 
-const char *selectedRadio() {
+const char *selected_radio() {
   int i = lv_dropdown_get_selected(app.radio_dropdown);
   LV_LOG_USER("Radio dropdown selected index: %d", i);
   if(i<0) {
     return NULL;
   }
-  struct RadioStruct *s = knownRadios;
+  struct RadioStruct *s = known_radios;
   for(int j=0; j<i; j++) {
     s = s->next;
     if(s == NULL) {
@@ -122,8 +122,8 @@ const char *selectedRadio() {
   return s->url;
 }
 
-int selectedRadioIndex() {
-  struct RadioStruct *s = knownRadios;
+int selected_radio_index() {
+  struct RadioStruct *s = known_radios;
   for(int j=0;; j++) {
     if(s->selected)
       return j;
@@ -134,8 +134,9 @@ int selectedRadioIndex() {
   }
 }
 
-void fetchRadioStatus() {
-  if(lv_screen_active() != app.radio_screen) {
+// XXX redo so it doesn't use lvgl
+void fetch_radio_status() {
+  if(lv_screen_active() != app.radio_screen->screen) {
     // LV_LOG_USER("Not fetching radio status, not on the radio page");
     return;
   }

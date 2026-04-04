@@ -3,15 +3,20 @@
 
 #include <Arduino.h>
 
+struct AppScreen {
+  lv_obj_t *screen;
+  lv_obj_t *main_flex;
+};
+
 struct AppStruct {
   lv_obj_t *main_screen;
-  lv_obj_t *radio_screen;
+  struct AppScreen *radio_screen;
   lv_obj_t *radio_status_label;
   lv_obj_t *radio_dropdown;
   unsigned long ticker;
 };
 
 
-char *copyString(String s);
+char *copy_string(String s);
 
 #endif

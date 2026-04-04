@@ -17,11 +17,11 @@ struct RadioStruct {
 
 extern struct AppStruct app;
 void event_handler_radio_command(lv_event_t *e);
-void fetchRadioStatus();
-void fetchRadios();
-struct RadioStruct *parseRadios(String s);
-char *radiosDropdownChar();
-int selectedRadioIndex();
-const char *selectedRadio();
+void fetch_radio_status();
+void fetch_radios();
+struct RadioStruct *parse_radios(String s);
+char *radios_dropdown_char();
+int selected_radio_index();
+const char *selected_radio();
 
 #endif
