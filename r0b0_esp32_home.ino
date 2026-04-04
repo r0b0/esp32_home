@@ -24,16 +24,11 @@
 // Main app
 struct AppStruct app;
 
-static void event_handler_screen_load_btn(lv_event_t * e) {
-  lv_screen_load_anim((lv_obj_t *)e->user_data, LV_SCREEN_LOAD_ANIM_OVER_LEFT, 200, 100, false);
-}
-
 void create_main_gui(void) {
-  // TODO standardize the screens
-  // https://medium.com/@akimik/let-item-fill-available-space-in-lvgl-flex-64e0f9e32c9b
   app.main_screen = lv_obj_create(NULL);
+  // TODO grid
+  lv_obj_set_layout(app.main_screen, LV_LAYOUT_FLEX);
   lv_obj_set_flex_flow(app.main_screen, LV_FLEX_FLOW_COLUMN);
-  app.radio_screen = gui_make_screen("Radio");
   lv_screen_load(app.main_screen);
 
   lv_obj_t *wifi_conn_label = lv_label_create(app.main_screen);
@@ -43,13 +38,12 @@ void create_main_gui(void) {
   lv_obj_set_style_text_align(wifi_conn_label, LV_TEXT_ALIGN_CENTER, 0);
   lv_obj_align(wifi_conn_label, LV_ALIGN_CENTER, 0, -90);
   
-  lv_obj_t *radio_btn = gui_make_btn(app.main_screen, LV_SYMBOL_AUDIO " Radio", LV_PALETTE_BLUE);
-  lv_obj_add_event_cb(radio_btn, event_handler_screen_load_btn, LV_EVENT_CLICKED, app.radio_screen->screen);
-  
+  app.radio_screen = gui_make_screen(LV_SYMBOL_AUDIO " Radio", LV_PALETTE_BLUE);
   app.radio_status_label = lv_label_create(app.radio_screen->main_flex);
   lv_label_set_long_mode(app.radio_status_label, LV_LABEL_LONG_MODE_SCROLL);
   lv_label_set_text(app.radio_status_label, "Loading...");
-  lv_obj_set_width(wifi_conn_label, LV_PCT(100));
+  lv_obj_set_width(app.radio_status_label, LV_PCT(100));
+  lv_obj_set_height(app.radio_status_label, 60);
 
   app.radio_dropdown = lv_dropdown_create(app.radio_screen->main_flex);
   char *r = radios_dropdown_char();
@@ -59,12 +53,24 @@ void create_main_gui(void) {
   // free(r); // XXX docs say this can be freed but apparently not
   lv_dropdown_set_selected(app.radio_dropdown, sri);
   lv_obj_set_width(app.radio_dropdown, LV_PCT(100));
+  lv_obj_align_to(app.radio_dropdown, app.radio_status_label, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 10);
 
   lv_obj_t *play_btn = gui_make_btn(app.radio_screen->main_flex, LV_SYMBOL_PLAY " Play", LV_PALETTE_GREEN);
   lv_obj_add_event_cb(play_btn, event_handler_radio_command, LV_EVENT_CLICKED, (void *)"play");
+  lv_obj_align_to(play_btn, app.radio_dropdown, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 10);
 
   lv_obj_t *stop_btn = gui_make_btn(app.radio_screen->main_flex, LV_SYMBOL_STOP " Stop", LV_PALETTE_AMBER);
   lv_obj_add_event_cb(stop_btn, event_handler_radio_command, LV_EVENT_CLICKED, (void *)"stop");
+  lv_obj_align_to(stop_btn, play_btn, LV_ALIGN_OUT_RIGHT_MID, 10, 0);
+
+  app.weather_screen = gui_make_screen(LV_SYMBOL_IMAGE " Weather", LV_PALETTE_LIME);
+  lv_obj_t *weather_label = lv_label_create(app.weather_screen->main_flex);
+  lv_label_set_text(weather_label, "Not implemented...");
+
+  app.bus_screen = gui_make_screen(LV_SYMBOL_BELL " Bus", LV_PALETTE_RED);
+  lv_obj_t *bus_label = lv_label_create(app.bus_screen->main_flex);
+  lv_label_set_text(bus_label, "Not implemented...");
+
 }
 
 void connect_to_wifi() {

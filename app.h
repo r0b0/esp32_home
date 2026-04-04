@@ -13,9 +13,10 @@ struct AppStruct {
   struct AppScreen *radio_screen;
   lv_obj_t *radio_status_label;
   lv_obj_t *radio_dropdown;
+  struct AppScreen *weather_screen;
+  struct AppScreen *bus_screen;
   unsigned long ticker;
 };
-
 
 char *copy_string(String s);
 

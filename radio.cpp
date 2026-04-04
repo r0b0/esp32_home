@@ -148,6 +148,7 @@ void fetch_radio_status() {
   int httpCode = http.GET();
   if (httpCode == 200) {
     String status = http.getString();
+    status.trim();
     lv_label_set_text(app.radio_status_label, status.c_str());
   } else {
     LV_LOG_USER("http call failed %d", httpCode);
