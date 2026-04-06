@@ -45,6 +45,10 @@ struct AppScreen *gui_make_screen(const char *name, lv_palette_t color) {
   lv_obj_set_flex_grow(screen->main_flex, 1);
 
   lv_obj_t *main_scr_btn = gui_make_btn(app.main_screen, name, color);
+  lv_obj_set_width(main_scr_btn, LV_PCT(100));
+  lv_obj_set_height(main_scr_btn, LV_PCT(25));
+  lv_obj_align_to(main_scr_btn, app.main_screen_last_btn, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 10);
+  app.main_screen_last_btn = main_scr_btn;
   lv_obj_add_event_cb(main_scr_btn, event_handler_screen_load_btn, LV_EVENT_CLICKED, screen->screen);
 
   return screen;

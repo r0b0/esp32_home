@@ -27,24 +27,21 @@ struct AppStruct app;
 
 void create_main_gui(void) {
   app.main_screen = lv_obj_create(NULL);
-  // TODO grid
-  lv_obj_set_layout(app.main_screen, LV_LAYOUT_FLEX);
-  lv_obj_set_flex_flow(app.main_screen, LV_FLEX_FLOW_COLUMN);
   lv_screen_load(app.main_screen);
 
   lv_obj_t *wifi_conn_label = lv_label_create(app.main_screen);
+  app.main_screen_last_btn = wifi_conn_label;
   lv_label_set_long_mode(wifi_conn_label, LV_LABEL_LONG_WRAP);    // Breaks the long lines
   lv_label_set_text(wifi_conn_label, WiFi.status() == WL_CONNECTED ? LV_SYMBOL_WIFI "Wifi Connected" : LV_SYMBOL_CLOSE "Wifi Not Connected");
   lv_obj_set_width(wifi_conn_label, LV_PCT(100));
   lv_obj_set_style_text_align(wifi_conn_label, LV_TEXT_ALIGN_CENTER, 0);
-  lv_obj_align(wifi_conn_label, LV_ALIGN_CENTER, 0, -90);
   
   app.radio_screen = gui_make_screen(LV_SYMBOL_AUDIO " Radio", LV_PALETTE_BLUE);
   app.radio_status_label = lv_label_create(app.radio_screen->main_flex);
   lv_label_set_long_mode(app.radio_status_label, LV_LABEL_LONG_MODE_SCROLL);
   lv_label_set_text(app.radio_status_label, "Loading...");
   lv_obj_set_width(app.radio_status_label, LV_PCT(100));
-  lv_obj_set_height(app.radio_status_label, 60);
+  lv_obj_set_height(app.radio_status_label, 70);
 
   app.radio_dropdown = lv_dropdown_create(app.radio_screen->main_flex);
   char *r = radios_dropdown_char();
@@ -69,7 +66,7 @@ void create_main_gui(void) {
   lv_label_set_text(app.weather_label, "Loading...");
   lv_obj_set_width(app.weather_label, LV_PCT(100));
   lv_obj_set_height(app.weather_label, LV_PCT(100));
-
+  
   lv_obj_t *weather_btn = gui_make_btn(app.weather_screen->top_flex, LV_SYMBOL_REFRESH " Refresh", LV_PALETTE_AMBER);
   lv_obj_align(weather_btn, LV_ALIGN_TOP_RIGHT, 0, 0);
   lv_obj_add_event_cb(weather_btn, event_handler_weather_refresh, LV_EVENT_CLICKED, 0);
@@ -77,7 +74,6 @@ void create_main_gui(void) {
   app.bus_screen = gui_make_screen(LV_SYMBOL_BELL " Bus", LV_PALETTE_RED);
   lv_obj_t *bus_label = lv_label_create(app.bus_screen->main_flex);
   lv_label_set_text(bus_label, "Not implemented...");
-
 }
 
 void connect_to_wifi() {
@@ -105,17 +101,24 @@ void setup() {
   fetch_weather();
 
   app.ticker = millis();
+  app.last_touch = millis();
+  app.turned_on = true;
 }
 
 void loop_10s() {
   // LV_LOG_USER("tick %d", app.ticker);
   fetch_radio_status();
+  if(millis() > app.last_touch + 30000) {
+    turn_off();
+  }
 }
 
 void loop() {
+  int delay_ms = app.turned_on ? 5 : 100;
+
   lv_task_handler();  // let the GUI do its work
-  lv_tick_inc(5);     // tell LVGL how much time has passed
-  delay(5);           // let this time pass
+  lv_tick_inc(delay_ms);     // tell LVGL how much time has passed
+  delay(delay_ms);           // let this time pass
 
   if(millis() > app.ticker + 10000) {
     app.ticker = millis();
