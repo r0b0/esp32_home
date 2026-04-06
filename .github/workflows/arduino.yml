@@ -14,6 +14,7 @@ jobs:
         cp conf_files/User_Setup.h /home/runner/Arduino/libraries/TFT_eSPI/
         echo '#define WIFI_SSID "my-ssid"' > r0b0_esp32_home/wifi_creds.h
         echo '#define WIFI_PWD "my-password"' >> r0b0_esp32_home/wifi_creds.h
+        echo '#define WEATHER_KEY "123deadbeef"' >> r0b0_esp32_home/weather_creds.h
     - name: Build the sketch
       uses: arduino/compile-sketches@v1
       with:
@@ -27,6 +28,8 @@ jobs:
             version: "1.4"
           - name: lvgl
             version: "9.5.0"
+          - name: ArduinoJson
+            version: "7.4.3"
         sketch-paths: |
           - "r0b0_esp32_home"
         cli-compile-flags: |

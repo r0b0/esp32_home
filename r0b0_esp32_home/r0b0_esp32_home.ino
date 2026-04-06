@@ -20,6 +20,7 @@
 #include "radio.h"
 #include "hw.h"
 #include "gui.h"
+#include "weather.h"
 
 // Main app
 struct AppStruct app;
@@ -64,8 +65,14 @@ void create_main_gui(void) {
   lv_obj_align_to(stop_btn, play_btn, LV_ALIGN_OUT_RIGHT_MID, 10, 0);
 
   app.weather_screen = gui_make_screen(LV_SYMBOL_IMAGE " Weather", LV_PALETTE_LIME);
-  lv_obj_t *weather_label = lv_label_create(app.weather_screen->main_flex);
-  lv_label_set_text(weather_label, "Not implemented...");
+  app.weather_label = lv_label_create(app.weather_screen->main_flex);
+  lv_label_set_text(app.weather_label, "Loading...");
+  lv_obj_set_width(app.weather_label, LV_PCT(100));
+  lv_obj_set_height(app.weather_label, LV_PCT(100));
+
+  lv_obj_t *weather_btn = gui_make_btn(app.weather_screen->top_flex, LV_SYMBOL_REFRESH " Refresh", LV_PALETTE_AMBER);
+  lv_obj_align(weather_btn, LV_ALIGN_TOP_RIGHT, 0, 0);
+  lv_obj_add_event_cb(weather_btn, event_handler_weather_refresh, LV_EVENT_CLICKED, 0);
 
   app.bus_screen = gui_make_screen(LV_SYMBOL_BELL " Bus", LV_PALETTE_RED);
   lv_obj_t *bus_label = lv_label_create(app.bus_screen->main_flex);
@@ -94,6 +101,8 @@ void setup() {
   fetch_radios();
 
   create_main_gui();
+
+  fetch_weather();
 
   app.ticker = millis();
 }

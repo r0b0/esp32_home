@@ -28,14 +28,14 @@ struct AppScreen *gui_make_screen(const char *name, lv_palette_t color) {
   lv_obj_set_flex_flow(screen->screen, LV_FLEX_FLOW_COLUMN);
   lv_obj_set_size(screen->screen, LV_PCT(100), LV_PCT(100));
 
-  lv_obj_t *top = lv_obj_create(screen->screen);
-  lv_obj_set_style_pad_ver(top, 0, 0);
-  lv_obj_set_size(top, LV_PCT(100), LV_SIZE_CONTENT);
+  screen->top_flex = lv_obj_create(screen->screen);
+  lv_obj_set_style_pad_ver(screen->top_flex, 0, 0);
+  lv_obj_set_size(screen->top_flex, LV_PCT(100), LV_SIZE_CONTENT);
 
-  lv_obj_t *back_btn = gui_make_btn(top, LV_SYMBOL_LEFT " Back", LV_PALETTE_TEAL);
+  lv_obj_t *back_btn = gui_make_btn(screen->top_flex, LV_SYMBOL_LEFT " Back", LV_PALETTE_TEAL);
   lv_obj_add_event_cb(back_btn, event_handler_back_btn, LV_EVENT_CLICKED, NULL);
 
-  lv_obj_t *label = lv_label_create(top);
+  lv_obj_t *label = lv_label_create(screen->top_flex);
   lv_label_set_text(label, name);
   lv_obj_align_to(label, back_btn, LV_ALIGN_OUT_RIGHT_MID, 10, 0);
   lv_obj_set_flex_grow(label, 1);
