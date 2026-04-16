@@ -1,0 +1,198 @@
+curl 'https://imhd.sk/rt/sio2/?EIO=4&transport=polling&t=811bqo3w' \
+  -H 'Accept: */*' \
+  -H 'Accept-Language: en-US,en;q=0.9,sk;q=0.8' \
+  -H 'Connection: keep-alive' \
+  -b 'FCCDCF=%5Bnull%2Cnull%2Cnull%2C%5B%22CQimfQAQimfQAEsACBENCaFoAP_gAAAAACRQK3oB_C7EbCFCiDJ3IKMEMAhXABBAYsAwAAYBAwAADBIQIAQCkkEaBASAFCACCAAAKASBAAAgCAAAAUAAIAAVAABAAAwAIBAIIAAAgAAAQEAIAAAACIAAEQCAAAAEAEAAkAgAAAIASEAAAAAAAACBAAAAAAAAAAAAAAAABAEAAQAAwAAAAAAAiAAAAAAAABAIEAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAABAAAAAAAQgAAAGCQIQAKgAXAA4ACAAEgAMgAaABMACqAH4ARwArQBgADKAHOAO4AewA_QCOAEiAJMAYoA4gCHQFNgLYAXIAvMBkgDJwGxgQvAreOgVgALAAqABwAEAAJAAZAA0ACYAFUALoAYgA_ACOAFGAK0AYAAygBogDnAHcAPYAfoBFgCOAEiAJMAYoA4gB5gEIAIdAReAmQBTYC2AFyALzAZIAycBlgD-wI7AVvIQEAAFgBVADEAH4AYAA5wB3AEcAJEASkAxQCHQFNgLkAZOA_slAYAAWABwAEgATAAqgBiAEcAKMAVoAwACOAGKAOIAhABDoCLwFNgLYAXIAvMBkgDJwGWAVvKQIwAFgAVAA4ACAAGQANAAmABVADEAH4ARwAowBWgDAAGUANEAc4A_QCLAEcAJEAYoA4gCHQEXgKbAWwAuQBeYDJAGTgMsAf2BHYCt5aAIAMAAdwBHAFNg.ILCIB_C7EbCFCiDJ3IKMEMAhXABBAYsAwAAYBAwAADBIQIAQCkkEaBASAFCACCAAAKASBAAAoCAgAAUAAIAAVAABAAAwAIBAIIEAAgAAAQEAIAAAACIAAEQCAAAAEAEAAkAgAAAIASEAAAAAAAACBAAAAAAAAAAAAAAAABAEAASAAwAAAAAAAiAAAAAAAABAIEAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAABAAAAAAAQgAAE.f3gAAAAAAAA%22%2C%222~61.89.122.161.184.196.230.314.442.445.494.550.576.827.1029.1033.1046.1047.1051.1097.1126.1166.1301.1342.1415.1725.1765.1942.1958.1987.2068.2072.2074.2107.2213.2219.2223.2224.2328.2331.2416.2501.2567.2568.2575.2657.2686.2778.2869.2878.2908.2920.2963.3005.3023.3126.3234.3235.3253.3309.3731.6931.8931.13731.15731.33931~dv.%22%2C%220A2FC0DD-5552-4FA0-AEEB-30A1ED7002F8%22%5D%2Cnull%2Cnull%2C%5B%5B32%2C%22%5B%5C%22a9b823a6-9ef0-439d-a899-40b69b4b9633%5C%22%2C%5B1776086322%2C574000000%5D%5D%22%5D%5D%5D; _gid=GA1.2.2020561475.1776086332; _gat_UA-6330992-1=1; _ga=GA1.1.983604587.1776086332; _ga_7N7TJSLZVM=GS2.2.s1776086332$o1$g1$t1776086464$j24$l0$h0; FCNEC=%5B%5B%22AKsRol-9wCt4tcdd1glHupvBIjlTUw7rlGh23w0USoQ8BZ5qupmNt5R7kGIqmZsuwMKWkvkhsL11mJVf3jJs5IAod6DEIuwaVlrjrgALdju4Wda-KTjCQsFCEtHUpBjBuxtNgDrLfwbFMiMfybsuSNVino2SV9JRtw%3D%3D%22%5D%5D; _ga_4G4DF1VXWW=GS2.1.s1776086331$o1$g1$t1776086472$j60$l0$h0' \
+  -H 'Referer: https://imhd.sk/ba/online-zastavkova-tabula?st=355&pfm=864' \
+  -H 'Sec-Fetch-Dest: empty' \
+  -H 'Sec-Fetch-Mode: cors' \
+  -H 'Sec-Fetch-Site: same-origin' \
+  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36' \
+  -H 'sec-ch-ua: "Google Chrome";v="147", "Not.A/Brand";v="8", "Chromium";v="147"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "Windows"'
+  
+  
+ HTTP/1.1 200 OK
+Server: nginx/1.15.5
+Date: Mon, 13 Apr 2026 13:21:12 GMT
+Content-Type: text/plain; charset=UTF-8
+Content-Length: 118
+Connection: keep-alive
+Vary: Origin
+Access-Control-Allow-Credentials: true
+cache-control: no-store
+
+0{"sid":"sBHwj-P9P7a54AT-YzCm","upgrades":["websocket"],"pingInterval":30000,"pingTimeout":20000,"maxPayload":1000000}
+
+
+
+curl ^"https://imhd.sk/rt/sio2/?EIO=4^&transport=polling^&t=811ew1v7^&sid=sBHwj-P9P7a54AT-YzCm^" ^
+  -H ^"Accept: */*^" ^
+  -H ^"Accept-Language: en-US,en;q=0.9,sk;q=0.8^" ^
+  -H ^"Connection: keep-alive^" ^
+  -H ^"Content-type: text/plain;charset=UTF-8^" ^
+  -b ^"FCCDCF=^%^5Bnull^%^2Cnull^%^2Cnull^%^2C^%^5B^%^22CQimfQAQimfQAEsACBENCaFoAP_gAAAAACRQK3oB_C7EbCFCiDJ3IKMEMAhXABBAYsAwAAYBAwAADBIQIAQCkkEaBASAFCACCAAAKASBAAAgCAAAAUAAIAAVAABAAAwAIBAIIAAAgAAAQEAIAAAACIAAEQCAAAAEAEAAkAgAAAIASEAAAAAAAACBAAAAAAAAAAAAAAAABAEAAQAAwAAAAAAAiAAAAAAAABAIEAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAABAAAAAAAQgAAAGCQIQAKgAXAA4ACAAEgAMgAaABMACqAH4ARwArQBgADKAHOAO4AewA_QCOAEiAJMAYoA4gCHQFNgLYAXIAvMBkgDJwGxgQvAreOgVgALAAqABwAEAAJAAZAA0ACYAFUALoAYgA_ACOAFGAK0AYAAygBogDnAHcAPYAfoBFgCOAEiAJMAYoA4gB5gEIAIdAReAmQBTYC2AFyALzAZIAycBlgD-wI7AVvIQEAAFgBVADEAH4AYAA5wB3AEcAJEASkAxQCHQFNgLkAZOA_slAYAAWABwAEgATAAqgBiAEcAKMAVoAwACOAGKAOIAhABDoCLwFNgLYAXIAvMBkgDJwGWAVvKQIwAFgAVAA4ACAAGQANAAmABVADEAH4ARwAowBWgDAAGUANEAc4A_QCLAEcAJEAYoA4gCHQEXgKbAWwAuQBeYDJAGTgMsAf2BHYCt5aAIAMAAdwBHAFNg.ILCIB_C7EbCFCiDJ3IKMEMAhXABBAYsAwAAYBAwAADBIQIAQCkkEaBASAFCACCAAAKASBAAAoCAgAAUAAIAAVAABAAAwAIBAIIEAAgAAAQEAIAAAACIAAEQCAAAAEAEAAkAgAAAIASEAAAAAAAACBAAAAAAAAAAAAAAAABAEAASAAwAAAAAAAiAAAAAAAABAIEAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAABAAAAAAAQgAAE.f3gAAAAAAAA^%^22^%^2C^%^222~61.89.122.161.184.196.230.314.442.445.494.550.576.827.1029.1033.1046.1047.1051.1097.1126.1166.1301.1342.1415.1725.1765.1942.1958.1987.2068.2072.2074.2107.2213.2219.2223.2224.2328.2331.2416.2501.2567.2568.2575.2657.2686.2778.2869.2878.2908.2920.2963.3005.3023.3126.3234.3235.3253.3309.3731.6931.8931.13731.15731.33931~dv.^%^22^%^2C^%^220A2FC0DD-5552-4FA0-AEEB-30A1ED7002F8^%^22^%^5D^%^2Cnull^%^2Cnull^%^2C^%^5B^%^5B32^%^2C^%^22^%^5B^%^5C^%^22a9b823a6-9ef0-439d-a899-40b69b4b9633^%^5C^%^22^%^2C^%^5B1776086322^%^2C574000000^%^5D^%^5D^%^22^%^5D^%^5D^%^5D; _gid=GA1.2.2020561475.1776086332; _gat_UA-6330992-1=1; _ga=GA1.1.983604587.1776086332; _ga_7N7TJSLZVM=GS2.2.s1776086332^$o1^$g1^$t1776086464^$j24^$l0^$h0; FCNEC=^%^5B^%^5B^%^22AKsRol-9wCt4tcdd1glHupvBIjlTUw7rlGh23w0USoQ8BZ5qupmNt5R7kGIqmZsuwMKWkvkhsL11mJVf3jJs5IAod6DEIuwaVlrjrgALdju4Wda-KTjCQsFCEtHUpBjBuxtNgDrLfwbFMiMfybsuSNVino2SV9JRtw^%^3D^%^3D^%^22^%^5D^%^5D; _ga_4G4DF1VXWW=GS2.1.s1776086331^$o1^$g1^$t1776086472^$j60^$l0^$h0^" ^
+  -H ^"Origin: https://imhd.sk^" ^
+  -H ^"Referer: https://imhd.sk/ba/online-zastavkova-tabula?st=355^&pfm=864^" ^
+  -H ^"Sec-Fetch-Dest: empty^" ^
+  -H ^"Sec-Fetch-Mode: cors^" ^
+  -H ^"Sec-Fetch-Site: same-origin^" ^
+  -H ^"User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36^" ^
+  -H ^"sec-ch-ua: ^\^"Google Chrome^\^";v=^\^"147^\^", ^\^"Not.A/Brand^\^";v=^\^"8^\^", ^\^"Chromium^\^";v=^\^"147^\^"^" ^
+  -H ^"sec-ch-ua-mobile: ?0^" ^
+  -H ^"sec-ch-ua-platform: ^\^"Windows^\^"^" ^
+  --data-raw ^"40^"
+  
+  
+HTTP/1.1 200 OK
+Server: nginx/1.15.5
+Date: Mon, 13 Apr 2026 13:21:13 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 2
+Connection: keep-alive
+Access-Control-Allow-Origin: https://imhd.sk
+Vary: Origin
+Access-Control-Allow-Credentials: true
+cache-control: no-store
+
+ok
+
+
+curl 'https://imhd.sk/rt/sio2/?EIO=4&transport=polling&t=811ewbs1&sid=sBHwj-P9P7a54AT-YzCm' \
+  -H 'Accept: */*' \
+  -H 'Accept-Language: en-US,en;q=0.9,sk;q=0.8' \
+  -H 'Connection: keep-alive' \
+  -b 'FCCDCF=%5Bnull%2Cnull%2Cnull%2C%5B%22CQimfQAQimfQAEsACBENCaFoAP_gAAAAACRQK3oB_C7EbCFCiDJ3IKMEMAhXABBAYsAwAAYBAwAADBIQIAQCkkEaBASAFCACCAAAKASBAAAgCAAAAUAAIAAVAABAAAwAIBAIIAAAgAAAQEAIAAAACIAAEQCAAAAEAEAAkAgAAAIASEAAAAAAAACBAAAAAAAAAAAAAAAABAEAAQAAwAAAAAAAiAAAAAAAABAIEAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAABAAAAAAAQgAAAGCQIQAKgAXAA4ACAAEgAMgAaABMACqAH4ARwArQBgADKAHOAO4AewA_QCOAEiAJMAYoA4gCHQFNgLYAXIAvMBkgDJwGxgQvAreOgVgALAAqABwAEAAJAAZAA0ACYAFUALoAYgA_ACOAFGAK0AYAAygBogDnAHcAPYAfoBFgCOAEiAJMAYoA4gB5gEIAIdAReAmQBTYC2AFyALzAZIAycBlgD-wI7AVvIQEAAFgBVADEAH4AYAA5wB3AEcAJEASkAxQCHQFNgLkAZOA_slAYAAWABwAEgATAAqgBiAEcAKMAVoAwACOAGKAOIAhABDoCLwFNgLYAXIAvMBkgDJwGWAVvKQIwAFgAVAA4ACAAGQANAAmABVADEAH4ARwAowBWgDAAGUANEAc4A_QCLAEcAJEAYoA4gCHQEXgKbAWwAuQBeYDJAGTgMsAf2BHYCt5aAIAMAAdwBHAFNg.ILCIB_C7EbCFCiDJ3IKMEMAhXABBAYsAwAAYBAwAADBIQIAQCkkEaBASAFCACCAAAKASBAAAoCAgAAUAAIAAVAABAAAwAIBAIIEAAgAAAQEAIAAAACIAAEQCAAAAEAEAAkAgAAAIASEAAAAAAAACBAAAAAAAAAAAAAAAABAEAASAAwAAAAAAAiAAAAAAAABAIEAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAABAAAAAAAQgAAE.f3gAAAAAAAA%22%2C%222~61.89.122.161.184.196.230.314.442.445.494.550.576.827.1029.1033.1046.1047.1051.1097.1126.1166.1301.1342.1415.1725.1765.1942.1958.1987.2068.2072.2074.2107.2213.2219.2223.2224.2328.2331.2416.2501.2567.2568.2575.2657.2686.2778.2869.2878.2908.2920.2963.3005.3023.3126.3234.3235.3253.3309.3731.6931.8931.13731.15731.33931~dv.%22%2C%220A2FC0DD-5552-4FA0-AEEB-30A1ED7002F8%22%5D%2Cnull%2Cnull%2C%5B%5B32%2C%22%5B%5C%22a9b823a6-9ef0-439d-a899-40b69b4b9633%5C%22%2C%5B1776086322%2C574000000%5D%5D%22%5D%5D%5D; _gid=GA1.2.2020561475.1776086332; _gat_UA-6330992-1=1; _ga=GA1.1.983604587.1776086332; _ga_7N7TJSLZVM=GS2.2.s1776086332$o1$g1$t1776086464$j24$l0$h0; FCNEC=%5B%5B%22AKsRol-9wCt4tcdd1glHupvBIjlTUw7rlGh23w0USoQ8BZ5qupmNt5R7kGIqmZsuwMKWkvkhsL11mJVf3jJs5IAod6DEIuwaVlrjrgALdju4Wda-KTjCQsFCEtHUpBjBuxtNgDrLfwbFMiMfybsuSNVino2SV9JRtw%3D%3D%22%5D%5D; _ga_4G4DF1VXWW=GS2.1.s1776086331$o1$g1$t1776086472$j60$l0$h0' \
+  -H 'Referer: https://imhd.sk/ba/online-zastavkova-tabula?st=355&pfm=864' \
+  -H 'Sec-Fetch-Dest: empty' \
+  -H 'Sec-Fetch-Mode: cors' \
+  -H 'Sec-Fetch-Site: same-origin' \
+  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36' \
+  -H 'sec-ch-ua: "Google Chrome";v="147", "Not.A/Brand";v="8", "Chromium";v="147"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "Windows"'
+  
+HTTP/1.1 200 OK
+Server: nginx/1.15.5
+Date: Mon, 13 Apr 2026 13:21:13 GMT
+Content-Type: text/plain; charset=UTF-8
+Content-Length: 48
+Connection: keep-alive
+Vary: Origin
+Access-Control-Allow-Credentials: true
+cache-control: no-store
+
+40{"sid":"xYD3E2Gb1oE1TaqqYzCn"}42["cack",true]
+
+
+
+curl 'https://imhd.sk/rt/sio2/?EIO=4&transport=polling&t=811gilrl&sid=sBHwj-P9P7a54AT-YzCm' \
+  -H 'Accept: */*' \
+  -H 'Accept-Language: en-US,en;q=0.9,sk;q=0.8' \
+  -H 'Connection: keep-alive' \
+  -b 'FCCDCF=%5Bnull%2Cnull%2Cnull%2C%5B%22CQimfQAQimfQAEsACBENCaFoAP_gAAAAACRQK3oB_C7EbCFCiDJ3IKMEMAhXABBAYsAwAAYBAwAADBIQIAQCkkEaBASAFCACCAAAKASBAAAgCAAAAUAAIAAVAABAAAwAIBAIIAAAgAAAQEAIAAAACIAAEQCAAAAEAEAAkAgAAAIASEAAAAAAAACBAAAAAAAAAAAAAAAABAEAAQAAwAAAAAAAiAAAAAAAABAIEAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAABAAAAAAAQgAAAGCQIQAKgAXAA4ACAAEgAMgAaABMACqAH4ARwArQBgADKAHOAO4AewA_QCOAEiAJMAYoA4gCHQFNgLYAXIAvMBkgDJwGxgQvAreOgVgALAAqABwAEAAJAAZAA0ACYAFUALoAYgA_ACOAFGAK0AYAAygBogDnAHcAPYAfoBFgCOAEiAJMAYoA4gB5gEIAIdAReAmQBTYC2AFyALzAZIAycBlgD-wI7AVvIQEAAFgBVADEAH4AYAA5wB3AEcAJEASkAxQCHQFNgLkAZOA_slAYAAWABwAEgATAAqgBiAEcAKMAVoAwACOAGKAOIAhABDoCLwFNgLYAXIAvMBkgDJwGWAVvKQIwAFgAVAA4ACAAGQANAAmABVADEAH4ARwAowBWgDAAGUANEAc4A_QCLAEcAJEAYoA4gCHQEXgKbAWwAuQBeYDJAGTgMsAf2BHYCt5aAIAMAAdwBHAFNg.ILCIB_C7EbCFCiDJ3IKMEMAhXABBAYsAwAAYBAwAADBIQIAQCkkEaBASAFCACCAAAKASBAAAoCAgAAUAAIAAVAABAAAwAIBAIIEAAgAAAQEAIAAAACIAAEQCAAAAEAEAAkAgAAAIASEAAAAAAAACBAAAAAAAAAAAAAAAABAEAASAAwAAAAAAAiAAAAAAAABAIEAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAABAAAAAAAQgAAE.f3gAAAAAAAA%22%2C%222~61.89.122.161.184.196.230.314.442.445.494.550.576.827.1029.1033.1046.1047.1051.1097.1126.1166.1301.1342.1415.1725.1765.1942.1958.1987.2068.2072.2074.2107.2213.2219.2223.2224.2328.2331.2416.2501.2567.2568.2575.2657.2686.2778.2869.2878.2908.2920.2963.3005.3023.3126.3234.3235.3253.3309.3731.6931.8931.13731.15731.33931~dv.%22%2C%220A2FC0DD-5552-4FA0-AEEB-30A1ED7002F8%22%5D%2Cnull%2Cnull%2C%5B%5B32%2C%22%5B%5C%22a9b823a6-9ef0-439d-a899-40b69b4b9633%5C%22%2C%5B1776086322%2C574000000%5D%5D%22%5D%5D%5D; _gid=GA1.2.2020561475.1776086332; _gat_UA-6330992-1=1; _ga=GA1.1.983604587.1776086332; _ga_7N7TJSLZVM=GS2.2.s1776086332$o1$g1$t1776086464$j24$l0$h0; FCNEC=%5B%5B%22AKsRol-9wCt4tcdd1glHupvBIjlTUw7rlGh23w0USoQ8BZ5qupmNt5R7kGIqmZsuwMKWkvkhsL11mJVf3jJs5IAod6DEIuwaVlrjrgALdju4Wda-KTjCQsFCEtHUpBjBuxtNgDrLfwbFMiMfybsuSNVino2SV9JRtw%3D%3D%22%5D%5D; _ga_4G4DF1VXWW=GS2.1.s1776086331$o1$g1$t1776086472$j60$l0$h0' \
+  -H 'Referer: https://imhd.sk/ba/online-zastavkova-tabula?st=355&pfm=864' \
+  -H 'Sec-Fetch-Dest: empty' \
+  -H 'Sec-Fetch-Mode: cors' \
+  -H 'Sec-Fetch-Site: same-origin' \
+  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36' \
+  -H 'sec-ch-ua: "Google Chrome";v="147", "Not.A/Brand";v="8", "Chromium";v="147"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "Windows"'
+  
+HTTP/1.1 200 OK
+Server: nginx/1.15.5
+Date: Mon, 13 Apr 2026 13:21:13 GMT
+Content-Type: text/plain; charset=UTF-8
+Content-Length: 45
+Connection: keep-alive
+Vary: Origin
+Access-Control-Allow-Credentials: true
+cache-control: no-store
+
+42["iText",["","","Test test test","","",""]]
+
+
+
+curl 'https://imhd.sk/rt/sio2/?EIO=4&transport=polling&t=811gjeyo&sid=sBHwj-P9P7a54AT-YzCm' \
+  -H 'Accept: */*' \
+  -H 'Accept-Language: en-US,en;q=0.9,sk;q=0.8' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-type: text/plain;charset=UTF-8' \
+  -b 'FCCDCF=%5Bnull%2Cnull%2Cnull%2C%5B%22CQimfQAQimfQAEsACBENCaFoAP_gAAAAACRQK3oB_C7EbCFCiDJ3IKMEMAhXABBAYsAwAAYBAwAADBIQIAQCkkEaBASAFCACCAAAKASBAAAgCAAAAUAAIAAVAABAAAwAIBAIIAAAgAAAQEAIAAAACIAAEQCAAAAEAEAAkAgAAAIASEAAAAAAAACBAAAAAAAAAAAAAAAABAEAAQAAwAAAAAAAiAAAAAAAABAIEAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAABAAAAAAAQgAAAGCQIQAKgAXAA4ACAAEgAMgAaABMACqAH4ARwArQBgADKAHOAO4AewA_QCOAEiAJMAYoA4gCHQFNgLYAXIAvMBkgDJwGxgQvAreOgVgALAAqABwAEAAJAAZAA0ACYAFUALoAYgA_ACOAFGAK0AYAAygBogDnAHcAPYAfoBFgCOAEiAJMAYoA4gB5gEIAIdAReAmQBTYC2AFyALzAZIAycBlgD-wI7AVvIQEAAFgBVADEAH4AYAA5wB3AEcAJEASkAxQCHQFNgLkAZOA_slAYAAWABwAEgATAAqgBiAEcAKMAVoAwACOAGKAOIAhABDoCLwFNgLYAXIAvMBkgDJwGWAVvKQIwAFgAVAA4ACAAGQANAAmABVADEAH4ARwAowBWgDAAGUANEAc4A_QCLAEcAJEAYoA4gCHQEXgKbAWwAuQBeYDJAGTgMsAf2BHYCt5aAIAMAAdwBHAFNg.ILCIB_C7EbCFCiDJ3IKMEMAhXABBAYsAwAAYBAwAADBIQIAQCkkEaBASAFCACCAAAKASBAAAoCAgAAUAAIAAVAABAAAwAIBAIIEAAgAAAQEAIAAAACIAAEQCAAAAEAEAAkAgAAAIASEAAAAAAAACBAAAAAAAAAAAAAAAABAEAASAAwAAAAAAAiAAAAAAAABAIEAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAABAAAAAAAQgAAE.f3gAAAAAAAA%22%2C%222~61.89.122.161.184.196.230.314.442.445.494.550.576.827.1029.1033.1046.1047.1051.1097.1126.1166.1301.1342.1415.1725.1765.1942.1958.1987.2068.2072.2074.2107.2213.2219.2223.2224.2328.2331.2416.2501.2567.2568.2575.2657.2686.2778.2869.2878.2908.2920.2963.3005.3023.3126.3234.3235.3253.3309.3731.6931.8931.13731.15731.33931~dv.%22%2C%220A2FC0DD-5552-4FA0-AEEB-30A1ED7002F8%22%5D%2Cnull%2Cnull%2C%5B%5B32%2C%22%5B%5C%22a9b823a6-9ef0-439d-a899-40b69b4b9633%5C%22%2C%5B1776086322%2C574000000%5D%5D%22%5D%5D%5D; _gid=GA1.2.2020561475.1776086332; _gat_UA-6330992-1=1; _ga=GA1.1.983604587.1776086332; _ga_7N7TJSLZVM=GS2.2.s1776086332$o1$g1$t1776086464$j24$l0$h0; FCNEC=%5B%5B%22AKsRol-9wCt4tcdd1glHupvBIjlTUw7rlGh23w0USoQ8BZ5qupmNt5R7kGIqmZsuwMKWkvkhsL11mJVf3jJs5IAod6DEIuwaVlrjrgALdju4Wda-KTjCQsFCEtHUpBjBuxtNgDrLfwbFMiMfybsuSNVino2SV9JRtw%3D%3D%22%5D%5D; _ga_4G4DF1VXWW=GS2.1.s1776086331$o1$g1$t1776086472$j60$l0$h0' \
+  -H 'Origin: https://imhd.sk' \
+  -H 'Referer: https://imhd.sk/ba/online-zastavkova-tabula?st=355&pfm=864' \
+  -H 'Sec-Fetch-Dest: empty' \
+  -H 'Sec-Fetch-Mode: cors' \
+  -H 'Sec-Fetch-Site: same-origin' \
+  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36' \
+  -H 'sec-ch-ua: "Google Chrome";v="147", "Not.A/Brand";v="8", "Chromium";v="147"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "Windows"' \
+  --data-raw '42["dataStop"]'
+  
+HTTP/1.1 200 OK
+Server: nginx/1.15.5
+Date: Mon, 13 Apr 2026 13:21:13 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 2
+Connection: keep-alive
+Access-Control-Allow-Origin: https://imhd.sk
+Vary: Origin
+Access-Control-Allow-Credentials: true
+cache-control: no-store
+
+ok
+
+
+curl 'wss://imhd.sk/rt/sio2/?EIO=4&transport=websocket&sid=sBHwj-P9P7a54AT-YzCm' \
+  -H 'Upgrade: websocket' \
+  -H 'Origin: https://imhd.sk' \
+  -H 'Cache-Control: no-cache' \
+  -H 'Accept-Language: en-US,en;q=0.9,sk;q=0.8' \
+  -H 'Pragma: no-cache' \
+  -b 'FCCDCF=%5Bnull%2Cnull%2Cnull%2C%5B%22CQimfQAQimfQAEsACBENCaFoAP_gAAAAACRQK3oB_C7EbCFCiDJ3IKMEMAhXABBAYsAwAAYBAwAADBIQIAQCkkEaBASAFCACCAAAKASBAAAgCAAAAUAAIAAVAABAAAwAIBAIIAAAgAAAQEAIAAAACIAAEQCAAAAEAEAAkAgAAAIASEAAAAAAAACBAAAAAAAAAAAAAAAABAEAAQAAwAAAAAAAiAAAAAAAABAIEAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAABAAAAAAAQgAAAGCQIQAKgAXAA4ACAAEgAMgAaABMACqAH4ARwArQBgADKAHOAO4AewA_QCOAEiAJMAYoA4gCHQFNgLYAXIAvMBkgDJwGxgQvAreOgVgALAAqABwAEAAJAAZAA0ACYAFUALoAYgA_ACOAFGAK0AYAAygBogDnAHcAPYAfoBFgCOAEiAJMAYoA4gB5gEIAIdAReAmQBTYC2AFyALzAZIAycBlgD-wI7AVvIQEAAFgBVADEAH4AYAA5wB3AEcAJEASkAxQCHQFNgLkAZOA_slAYAAWABwAEgATAAqgBiAEcAKMAVoAwACOAGKAOIAhABDoCLwFNgLYAXIAvMBkgDJwGWAVvKQIwAFgAVAA4ACAAGQANAAmABVADEAH4ARwAowBWgDAAGUANEAc4A_QCLAEcAJEAYoA4gCHQEXgKbAWwAuQBeYDJAGTgMsAf2BHYCt5aAIAMAAdwBHAFNg.ILCIB_C7EbCFCiDJ3IKMEMAhXABBAYsAwAAYBAwAADBIQIAQCkkEaBASAFCACCAAAKASBAAAoCAgAAUAAIAAVAABAAAwAIBAIIEAAgAAAQEAIAAAACIAAEQCAAAAEAEAAkAgAAAIASEAAAAAAAACBAAAAAAAAAAAAAAAABAEAASAAwAAAAAAAiAAAAAAAABAIEAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAABAAAAAAAQgAAE.f3gAAAAAAAA%22%2C%222~61.89.122.161.184.196.230.314.442.445.494.550.576.827.1029.1033.1046.1047.1051.1097.1126.1166.1301.1342.1415.1725.1765.1942.1958.1987.2068.2072.2074.2107.2213.2219.2223.2224.2328.2331.2416.2501.2567.2568.2575.2657.2686.2778.2869.2878.2908.2920.2963.3005.3023.3126.3234.3235.3253.3309.3731.6931.8931.13731.15731.33931~dv.%22%2C%220A2FC0DD-5552-4FA0-AEEB-30A1ED7002F8%22%5D%2Cnull%2Cnull%2C%5B%5B32%2C%22%5B%5C%22a9b823a6-9ef0-439d-a899-40b69b4b9633%5C%22%2C%5B1776086322%2C574000000%5D%5D%22%5D%5D%5D; _gid=GA1.2.2020561475.1776086332; _gat_UA-6330992-1=1; _ga=GA1.1.983604587.1776086332; _ga_7N7TJSLZVM=GS2.2.s1776086332$o1$g1$t1776086464$j24$l0$h0; FCNEC=%5B%5B%22AKsRol-9wCt4tcdd1glHupvBIjlTUw7rlGh23w0USoQ8BZ5qupmNt5R7kGIqmZsuwMKWkvkhsL11mJVf3jJs5IAod6DEIuwaVlrjrgALdju4Wda-KTjCQsFCEtHUpBjBuxtNgDrLfwbFMiMfybsuSNVino2SV9JRtw%3D%3D%22%5D%5D; _ga_4G4DF1VXWW=GS2.1.s1776086331$o1$g1$t1776086472$j60$l0$h0' \
+  -H 'Connection: Upgrade' \
+  -H 'Sec-WebSocket-Key: 8YpgmVNiO2HBNUsxyBWy6g==' \
+  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36' \
+  -H 'Sec-WebSocket-Version: 13' \
+  -H 'Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits'
+  
+  
+HTTP/1.1 101 Switching Protocols
+Server: nginx/1.15.5
+Date: Mon, 13 Apr 2026 13:21:13 GMT
+Connection: upgrade
+Upgrade: websocket
+Sec-WebSocket-Accept: +we1dH8N+YGHnZEvZl1wKfAyojc=
+Access-Control-Allow-Origin: https://imhd.sk
+Vary: Origin
+Access-Control-Allow-Credentials: true
+
+up 2probe
+
+down 3probe
+
+up 5
+
+42["tabStart",[355,["*"],"ba"]]
+
+down 42["tabs",[{"zastavka":355,"nastupiste":864,"timestamp":1776086473156,"tab":[]}]]
+
+down 42["vInfo",{"id":10589,"lf":1,"ac":1,"img":705,"imgt":1,"type":"SOR NB 18 City","issi":"1:1863","operaror":"1"}]
+
+down 42["vInfo",{"id":10566,"lf":1,"ac":1,"img":1056,"imgt":1,"type":"SOR NB 12 City","issi":"1:2036","operaror":"1"}]
+
+...
+
+42["tabs",[{"zastavka":355,"nastupiste":864,"timestamp":1776086473157,"nextRowAt":null,"tab":[{"linka":"30","sekcie":["ba"],"tuZidx":17,"i":-16806446,"cas":1776086760000,"casCP":1776086760000,"typ":"cp","cielStr":"Nem. Bory ► Podvornice","konecnaZstr":"Podvornice","konecnaZobec":"Bratislava","odjazd":"4 min"},{"linka":"30","issi":"1:2036","sekcie":["ba"],"tuZidx":17,"i":-16806467,"cas":1776087645000,"casCP":1776087660000,"casDelta":0,"typ":"online","cielStr":"Nem. Bory ► Podvornice","konecnaZstr":"Podvornice","konecnaZobec":"Bratislava","odjazd":"19 min"},{"linka":"30","issi":"1:2543","sekcie":["ba"],"tuZidx":16,"i":-16806490,"cas":1776086565000,"casCP":1776086400000,"casDelta":3,"typ":"online","predoslaZidx":13,"cielStr":"Patrónka","konecnaZstr":"Patrónka","konecnaZobec":"Bratislava","predoslaZstr":"Klanec","predoslaZobec":"Bratislava","odjazd":"1 min"},{"linka":"30","issi":"1:2546","sekcie":["ba"],"tuZidx":16,"i":-16806511,"cas":1776087345000,"casCP":1776087300000,"casDelta":1,"typ":"online","predoslaZidx":3,"cielStr":"Patrónka","konecnaZstr":"Patrónka","konecnaZobec":"Bratislava","predoslaZstr":"Agátová","predoslaZobec":"Bratislava","odjazd":"14 min"},{"linka":"30","issi":"1:2543","sekcie":["ba"],"tuZidx":17,"i":-16806497,"cas":1776106485000,"casCP":1776106500000,"casDelta":0,"typ":"online","cielStr":"Nem. Bory ► Podvornice","konecnaZstr":"Bojnická","konecnaZobec":"Bratislava","odjazd":"20:55"},{"linka":"63","issi":"1:3312","sekcie":["ba"],"tuZidx":2,"i":-16790186,"cas":1776086925000,"casCP":1776086940000,"casDelta":0,"typ":"online","cielStr":"Avion Shop. Park","cielStrTTS":"Avion Shopping Park","konecnaZstr":"Avion Shop. Park","konecnaZstrTTS":"Avion Shopping Park","konecnaZobec":"Bratislava","odjazd":"7 min"},{"linka":"63","issi":"1:1863","sekcie":["ba"],"tuZidx":2,"i":-16790053,"cas":1776087525000,"casCP":1776087540000,"casDelta":0,"typ":"online","cielStr":"Avion Shop. Park","cielStrTTS":"Avion Shopping Park","konecnaZstr":"Avion Shop. Park","konecnaZstrTTS":"Avion Shopping Park","konecnaZobec":"Bratislava","odjazd":"17 min"},{"linka":"63","issi":"1:1863","sekcie":["ba"],"tuZidx":2,"i":-16790057,"cas":1776100125000,"casCP":1776100140000,"casDelta":0,"typ":"online","cielStr":"Bojnická","konecnaZstr":"Bojnická","konecnaZobec":"Bratislava","odjazd":"19:09"},{"linka":"23","issi":"1:2047","sekcie":["ba"],"tuZidx":2,"i":-16805660,"cas":1776086985000,"casCP":1776087000000,"casDelta":0,"typ":"online","cielStr":"Jána Jonáša, VW1","cielStrTTS":"Jána Jonáša, Volkswagen brána 1","konecnaZstr":"Jána Jonáša, VW1","konecnaZstrTTS":"Jána Jonáša, Volkswagen brána 1","konecnaZobec":"Bratislava","odjazd":"8 min"},{"linka":"23","issi":"1:2547","sekcie":["ba"],"tuZidx":2,"i":-16805714,"cas":1776088785000,"casCP":1776088800000,"casDelta":0,"typ":"online","cielStr":"Jána Jonáša, VW1","cielStrTTS":"Jána Jonáša, Volkswagen brána 1","konecnaZstr":"Jána Jonáša, VW1","konecnaZstrTTS":"Jána Jonáša, Volkswagen brána 1","konecnaZobec":"Bratislava","odjazd":"38 min"}]}]]
+
+down 2
+
+up 3
+
+
+tabStart
+[355,[864],"ba"]
+

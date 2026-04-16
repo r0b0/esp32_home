@@ -1,0 +1,16 @@
+{
+  "name": "imhd-dummy-server",
+  "version": "1.0.0",
+  "description": "Dummy Socket.IO v4 server mimicking imhd.sk real-time transit data",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "socket.io": "^4.7.5"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "license": "MIT"
+}
