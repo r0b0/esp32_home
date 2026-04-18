@@ -32,6 +32,7 @@ const io = new Server(httpServer, {
   // Engine.IO v4 is the default for Socket.IO v4 — no extra config needed
 });
 
+// TODO replace by binary-response-example.txt
 const RANDOM_TABS = require("../tabs-message-example.json")[1];
 
 // ---------------------------------------------------------------------------
