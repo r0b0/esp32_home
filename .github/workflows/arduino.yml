@@ -20,8 +20,6 @@ jobs:
       with:
         fqbn: "esp32:esp32:esp32"
         libraries: |
-          - name: HttpClient
-            version: "2.2.0"
           - name: TFT_eSPI
             version: "2.5.43"
           - name: XPT2046_Touchscreen

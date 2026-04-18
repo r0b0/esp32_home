@@ -1,25 +1,21 @@
-robo@aspire:~/Arduino/r0b0_esp32_home/mhd_tabula_sketch$ curl 'http://localhost:3000/rt/sio2/?EIO=4&transport=polling'
-0{"sid":"df_KTKd69qJvxgLbAAAz","upgrades":["websocket"],"pingInterval":25000,"pingTimeout":20000,"maxPayload":1000000}
-
-
-robo@aspire:~/Arduino/r0b0_esp32_home/mhd_tabula_sketch$ curl 'http://localhost:3000/rt/sio2/?EIO=4&transport=polling'
-0{"sid":"kZSeHTd-UaExYJ8OAABB","upgrades":["websocket"],"pingInterval":25000,"pingTimeout":20000,"maxPayload":1000000}
+$ curl 'http://localhost:3000/rt/sio2/?EIO=4&transport=polling'
+0{"sid":"nmOH4115-tlRpBHEAAAG","upgrades":["websocket"],"pingInterval":25000,"pingTimeout":20000,"maxPayload":1000000}
 
 
 
-robo@aspire:~/Arduino/r0b0_esp32_home/mhd_tabula_sketch$ curl 'http://localhost:3000/rt/sio2/?EIO=4&transport=polling&sid=kZSeHTd-UaExYJ8OAABB' -d 40
+$ curl 'http://localhost:3000/rt/sio2/?EIO=4&transport=polling&sid=nmOH4115-tlRpBHEAAAG' -d 40
 ok
 
 
-robo@aspire:~/Arduino/r0b0_esp32_home/mhd_tabula_sketch$ curl 'http://localhost:3000/rt/sio2/?EIO=4&transport=polling&sid=kZSeHTd-UaExYJ8OAABB'
+$ curl 'http://localhost:3000/rt/sio2/?EIO=4&transport=polling&sid=nmOH4115-tlRpBHEAAAG'
 40{"sid":"yt-v1ba8ltcQlD8zAABC"}42["welcome",{"server":"imhd-dummy","version":"1.0.0","timestamp":1776442929544}]
 
 
-robo@aspire:~/Arduino/r0b0_esp32_home/mhd_tabula_sketch$ curl 'http://localhost:3000/rt/sio2/?EIO=4&transport=polling&sid=kZSeHTd-UaExYJ8OAABB' -d @tabstart.txt
+$ curl 'http://localhost:3000/rt/sio2/?EIO=4&transport=polling&sid=nmOH4115-tlRpBHEAAAG' -d @tabstart.txt
 ok
 
 
-robo@aspire:~/Arduino/r0b0_esp32_home/mhd_tabula_sketch$ curl 'http://localhost:3000/rt/sio2/?EIO=4&transport=polling&sid=kZSeHTd-UaExYJ8OAABB'
+$ curl 'http://localhost:3000/rt/sio2/?EIO=4&transport=polling&sid=nmOH4115-tlRpBHEAAAG'
 242["tabs",[{"zastavka":355,"nastupiste":864,"timestamp":1776086473157,"nextRowAt":null,"tab":[{"linka":"30","sekcie":["ba"],"tuZidx":17,"i":-16806446,"cas":1776086760000,"casCP":1776086760000,"typ":"cp","cielStr":"Nem. Bory ► Podvornice","konecnaZstr":"Podvornice","konecnaZobec":"Bratislava","odjazd":"4 min"},{"linka":"30","issi":"1:2036","sekcie":["ba"],"tuZidx":17,"i":-16806467,"cas":1776087645000,"casCP":1776087660000,"casDelta":0,"typ":"online","cielStr":"Nem. Bory ► Podvornice","konecnaZstr":"Podvornice","konecnaZobec":"Bratislava","odjazd":"19 min"},{"linka":"30","issi":"1:2543","sekcie":["ba"],"tuZidx":16,"i":-16806490,"cas":1776086565000,"casCP":1776086400000,"casDelta":3,"typ":"online","predoslaZidx":13,"cielStr":"Patrónka","konecnaZstr":"Patrónka","konecnaZobec":"Bratislava","predoslaZstr":"Klanec","predoslaZobec":"Bratislava","odjazd":"1 min"},{"linka":"30","issi":"1:2546","sekcie":["ba"],"tuZidx":16,"i":-16806511,"cas":1776087345000,"casCP":1776087300000,"casDelta":1,"typ":"online","predoslaZidx":3,"cielStr":"Patrónka","konecnaZstr":"Patrónka","konecnaZobec":"Bratislava","predoslaZstr":"Agátová","predoslaZobec":"Bratislava","odjazd":"14 min"},{"linka":"30","issi":"1:2543","sekcie":["ba"],"tuZidx":17,"i":-16806497,"cas":1776106485000,"casCP":1776106500000,"casDelta":0,"typ":"online","cielStr":"Nem. Bory ► Podvornice","konecnaZstr":"Bojnická","konecnaZobec":"Bratislava","odjazd":"20:55"},{"linka":"63","issi":"1:3312","sekcie":["ba"],"tuZidx":2,"i":-16790186,"cas":1776086925000,"casCP":1776086940000,"casDelta":0,"typ":"online","cielStr":"Avion Shop. Park","cielStrTTS":"Avion Shopping Park","konecnaZstr":"Avion Shop. Park","konecnaZstrTTS":"Avion Shopping Park","konecnaZobec":"Bratislava","odjazd":"7 min"},{"linka":"63","issi":"1:1863","sekcie":["ba"],"tuZidx":2,"i":-16790053,"cas":1776087525000,"casCP":1776087540000,"casDelta":0,"typ":"online","cielStr":"Avion Shop. Park","cielStrTTS":"Avion Shopping Park","konecnaZstr":"Avion Shop. Park","konecnaZstrTTS":"Avion Shopping Park","konecnaZobec":"Bratislava","odjazd":"17 min"},{"linka":"63","issi":"1:1863","sekcie":["ba"],"tuZidx":2,"i":-16790057,"cas":1776100125000,"casCP":1776100140000,"casDelta":0,"typ":"online","cielStr":"Bojnická","konecnaZstr":"Bojnická","konecnaZobec":"Bratislava","odjazd":"19:09"},{"linka":"23","issi":"1:2047","sekcie":["ba"],"tuZidx":2,"i":-16805660,"cas":1776086985000,"casCP":1776087000000,"casDelta":0,"typ":"online","cielStr":"Jána Jonáša, VW1","cielStrTTS":"Jána Jonáša, Volkswagen brána 1","konecnaZstr":"Jána Jonáša, VW1","konecnaZstrTTS":"Jána Jonáša, Volkswagen brána 1","konecnaZobec":"Bratislava","odjazd":"8 min"},{"linka":"23","issi":"1:2547","sekcie":["ba"],"tuZidx":2,"i":-16805714,"cas":1776088785000,"casCP":1776088800000,"casDelta":0,"typ":"online","cielStr":"Jána Jonáša, VW1","cielStrTTS":"Jána Jonáša, Volkswagen brána 1","konecnaZstr":"Jána Jonáša, VW1","konecnaZstrTTS":"Jána Jonáša, Volkswagen brána 1","konecnaZobec":"Bratislava","odjazd":"38 min"}]}]]
 
 
