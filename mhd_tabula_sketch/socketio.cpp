@@ -1,11 +1,62 @@
 #include <Arduino.h>
 #include <ArduinoJson.h>
+#include <HTTPClient.h>
 #include "socketio.h"
 
-handle_string_f socketio_sid_callback;
-handle_string_f socketio_message_callback;
+SocketIo::SocketIo(String u) {
+  url = u + String("?EIO=4&transport=polling");
+  http.begin(url);
+  http.setTimeout(30000);
+}
 
-int socketio_get_packet_count(String data) {
+int SocketIo::receive() {
+  http.begin(url);
+  int ret = http.GET();
+  /*
+  // UNFORTUNATELY, THIS DOES NOT WORK
+  if(ret == HTTPC_ERROR_READ_TIMEOUT) {
+    Serial.println("Timeout received on long poll, will re-try on next loop");
+    return 0;
+  }
+  */
+  if(ping_timeout) {
+    next_rec_millis = millis() + (ping_timeout * 0.8);
+  }
+  String received_data = http.getString();
+  Serial.printf("received data: %d %s\n", ret, received_data.c_str());
+  if(ret != 200) {
+    return -1;
+  }
+  process_data(received_data);
+  return 0;
+}
+
+int SocketIo::send(char engine_io_type, char socket_io_type, String payload) {
+  http.begin(url);
+  String data = String(engine_io_type);
+  if(socket_io_type) {
+    data = data + String(socket_io_type);
+    if(payload.length()) {
+      data = data + payload;
+    }
+  }
+  Serial.printf("POSTing to %s: %s", url.c_str(), data.c_str());
+  int ret = http.POST(data);
+  if(ret != 200) {
+    return -1;
+  }
+  String resp = http.getString();
+  if(!resp.equals("ok")) {
+    return -2;
+  }
+  return 0;
+}
+
+int SocketIo::send_event(String payload) {
+  return send(ENGINEIO_PTYPE_MESSAGE, SOCKETIO_PTYPE_EVENT, payload);
+}
+
+int SocketIo::get_packet_count(String data) {
   int count = 1;
   for(int i=0; i<data.length(); i++) {
     if(data.charAt(i) == ENGINEIO_SEPARATOR_CHAR)
@@ -14,7 +65,7 @@ int socketio_get_packet_count(String data) {
   return count;
 }
 
-String socketio_get_packet(String data, int index) {
+String SocketIo::get_packet(String data, int index) {
   int packet_end = data.indexOf(ENGINEIO_SEPARATOR_CHAR);
   if(!index) {
     if(packet_end<0) {
@@ -24,18 +75,17 @@ String socketio_get_packet(String data, int index) {
     }
   } else {
     String next = data.substring(packet_end+1);
-    return socketio_get_packet(next, index-1);
+    return get_packet(next, index-1);
   }
 }
 
-void socketio_process_data(String data) {
-  for(int i=0; i<socketio_get_packet_count(data); i++) {
-    String packet = socketio_get_packet(data, i);
+void SocketIo::process_data(String data) {
+  for(int i=0; i<get_packet_count(data); i++) {
+    String packet = get_packet(data, i);
     String message_data;
     char socketio_packet_type;
     JsonDocument doc;
     DeserializationError json_error;
-    String sid;
     char engineio_packet_type = packet[0];
     switch(engineio_packet_type) {
       case ENGINEIO_PTYPE_OPEN:
@@ -48,17 +98,21 @@ void socketio_process_data(String data) {
           break;
         }
         sid = doc["sid"].as<String>();
-        Serial.printf("  new sid %s\n", sid.c_str());
-        if(socketio_sid_callback) 
-          socketio_sid_callback(sid);
+        url = url + String("&sid=") + sid;
+        ping_timeout = doc["pingTimeout"];
+        Serial.printf("  new sid %s, ping timeout %d\n", sid.c_str(), ping_timeout);
         break;
       case ENGINEIO_PTYPE_MESSAGE:
         socketio_packet_type = packet[1];
         message_data = packet.substring(2);
         Serial.printf("Packet #%d engine.io type MESSAGE socket.io type %c data %s\n",
           i, socketio_packet_type, message_data.c_str());
-        if(socketio_packet_type == SOCKETIO_PTYPE_EVENT && socketio_message_callback)
-          socketio_message_callback(message_data);
+        if(socketio_packet_type == SOCKETIO_PTYPE_EVENT && event_callback)
+          event_callback(message_data);
+        break;
+      case ENGINEIO_PTYPE_PING:
+        Serial.printf("Packet #%d engine.io type PING, sending a PONG\n", i);
+        send(ENGINEIO_PTYPE_PONG, 0, "");
         break;
       default:
         message_data = packet.substring(1);
@@ -68,10 +122,36 @@ void socketio_process_data(String data) {
   }
 }
 
-void socketio_set_sid_callback(handle_string_f f) {
-  socketio_sid_callback = f;
+void SocketIo::set_event_callback(handle_string_f f) {
+  event_callback = f;
 }
 
-void socketio_set_message_callback(handle_string_f f) {
-  socketio_message_callback = f;
+int SocketIo::connect(String nmspc) {
+  int err;
+  err = receive();
+  if(err) {
+    Serial.printf("Socket connect failed: %d\n", err);
+    return err;
+  } 
+
+  err = send(ENGINEIO_PTYPE_MESSAGE, SOCKETIO_PTYPE_CONNECT, nmspc);
+  if(err) {
+    Serial.printf("namespace connect failed: %d\n", err);
+    return err;
+  }
+
+  err = receive();
+  if(err) {
+    Serial.printf("Socket receive failed: %d\n", err);
+    return err;
+  }
+
+  return 0;
+}
+
+void SocketIo::loop() {
+  if(next_rec_millis > 0 && millis() > next_rec_millis) {
+    Serial.println("Fetching data from the loop");
+    receive();
+  }
 }

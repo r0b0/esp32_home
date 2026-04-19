@@ -2,6 +2,7 @@
 #define SOCKETIO_H
 
 #include <Arduino.h>
+#include <HTTPClient.h>
 
 #define ENGINEIO_SEPARATOR_CHAR 0x1e
 
@@ -21,12 +22,28 @@
 #define SOCKETIO_PTYPE_BINARY_EVENT  '5'
 #define SOCKETIO_PTYPE_BINARY_ACK    '6'
 
-int socketio_get_packet_count(String data);
-String socketio_get_packet(String data, int index);
-void socketio_process_data(String data);
+typedef void (*handle_string_f)(String);
 
-typedef void (*handle_string_f)(String sid);
-void socketio_set_sid_callback(handle_string_f);
-void socketio_set_message_callback(handle_string_f);
+class SocketIo {
+  handle_string_f event_callback;
+  String url;
+  String sid;
+  HTTPClient http;
+  int ping_timeout;
+  int next_rec_millis;
+  void process_data(String data);
+  int get_packet_count(String data);
+  int send(char engine_io_type, char socket_io_type, String payload);
+  String get_packet(String data, int index);
+  public:
+    SocketIo(String url);
+    void set_event_callback(handle_string_f);
+    int connect(String);
+    int send_event(String);
+    int receive();
+    void loop();
+};
+
+
 
 #endif
