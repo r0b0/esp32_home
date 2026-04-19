@@ -32,8 +32,10 @@ const io = new Server(httpServer, {
   // Engine.IO v4 is the default for Socket.IO v4 — no extra config needed
 });
 
-// TODO replace by binary-response-example.txt
-const RANDOM_TABS = require("../tabs-message-example.json")[1];
+const VINFO0 = require("../sample_messages/vinfo0.json")[1];
+const VINFO1 = require("../sample_messages/vinfo1.json")[1];
+const EMPTY_TABS = require("../sample_messages/tabs0.json")[1];
+const RANDOM_TABS = require("../sample_messages/tabs-message-example.json")[1];
 
 // ---------------------------------------------------------------------------
 // Connection handler
@@ -43,16 +45,6 @@ io.on("connection", (socket) => {
 
   // Per-socket map of active vInfo intervals keyed by "<zastavka>:<nastupiste>"
   const vInfoIntervals = new Map();
-
-  // -------------------------------------------------------------------------
-  // Handshake / welcome
-  // Emit a lightweight acknowledgement so the client knows the server is ready.
-  // -------------------------------------------------------------------------
-  socket.emit("welcome", {
-    server: "imhd-dummy",
-    version: "1.0.0",
-    timestamp: Date.now(),
-  });
 
   // -------------------------------------------------------------------------
   // `tabStart` event
@@ -83,6 +75,9 @@ io.on("connection", (socket) => {
       console.log(`  -> starting tabs stream for key=${key} ooo`);
 
       // Emit an immediate first update, then continue every 30 s
+      socket.emit("tabs", EMPTY_TABS);
+      socket.emit("vInfo", VINFO0);
+      socket.emit("vInfo", VINFO1);
       socket.emit("tabs", RANDOM_TABS);
 
       const interval = setInterval(() => {

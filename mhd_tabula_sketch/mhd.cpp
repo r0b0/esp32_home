@@ -2,11 +2,54 @@
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
 #include <Arduino.h>
+#include "socketio.h"
 
-const char *mhd_socketio_sid;
+char *mhd_socketio_sid;
+
+void set_mhd_sid(String sid) {
+  mhd_socketio_sid = (char *)malloc(sid.length());
+  strcpy(mhd_socketio_sid, sid.c_str());
+}
+
+void process_mhd_message(String message) {
+  JsonDocument doc;
+  DeserializationError json_error = deserializeJson(doc, message);
+  if(json_error) {
+    Serial.println(json_error.c_str());
+    return;
+  }
+  String event_type = doc[0].as<String>();
+  Serial.printf("event type: %s\n", event_type.c_str());
+  if(!event_type.equals("tabs")) {
+    return;
+  }
+  JsonArray tabs = doc[1].as<JsonArray>();
+  for(JsonObject tab: tabs) {
+    /*
+    Serial.printf("  tab is null %d\n", tab.isNull());
+    for (JsonPair kv : tab) {
+      Serial.println(kv.key().c_str());
+      Serial.println(kv.value().as<const char*>());
+    }
+    */
+    int zastavka = tab["zastavka"];
+    int nastupiste = tab["nastupiste"];
+    Serial.printf(" zastavka %d nastupiste %d\n", zastavka, nastupiste);
+
+    JsonArray tabula = tab["tab"].as<JsonArray>();
+    for(JsonObject bus: tabula) {
+      const char *linka = bus["linka"];
+      const char *ciel = bus["cielStr"];
+      const char *odjazd = bus["odjazd"];
+      Serial.printf("    %s %s %s\n", linka, ciel, odjazd);
+    }
+  }
+}
 
 int mhd_connect() {
   HTTPClient http;
+  socketio_set_sid_callback(set_mhd_sid);
+  socketio_set_message_callback(process_mhd_message);
   // http.setReuse(false);
   String url = String(MHD_URL) + String("?EIO=4&transport=polling");
   Serial.printf("Connecting to %s\n", url.c_str());
@@ -15,6 +58,7 @@ int mhd_connect() {
   int ret = http.GET();
   String received_data = http.getString();
   Serial.printf("connect data: %d %s\n", ret, received_data.c_str());
+  socketio_process_data(received_data);
   if(ret != 200) {
     return -1;
   }
@@ -22,12 +66,12 @@ int mhd_connect() {
     return -2;
   }
   JsonDocument doc;
-  DeserializationError json_error = deserializeJson(doc, received_data.substring(1));
-  if(json_error) {
-    Serial.println(json_error.c_str());
-    return -3;
-  }
-  mhd_socketio_sid = doc["sid"];
+  // DeserializationError json_error = deserializeJson(doc, received_data.substring(1));
+  // if(json_error) {
+  //   Serial.println(json_error.c_str());
+  //   return -3;
+  // }
+  // mhd_socketio_sid = doc["sid"];
   // http.end();
   // delay(10000);
 
@@ -51,6 +95,7 @@ int mhd_connect() {
   ret = http.GET();
   received_data = http.getString();
   Serial.printf("get response: %d %s\n", ret, received_data.c_str());
+  socketio_process_data(received_data);
   if(ret != 200) {
     return -11;
   }
@@ -84,10 +129,11 @@ int mhd_get() {
   int ret = http.GET();
   String received_data = http.getString();
   Serial.printf("get response: %d %s\n", ret, received_data.c_str());
+  socketio_process_data(received_data);
   if(ret != 200) {
     return -8;
   }
-
+  /*
   if(received_data.indexOf('42["tabs') < 0) {
     return -9;
   }
@@ -111,6 +157,7 @@ int mhd_get() {
     const char *odjazd = bus["odjazd"];
     Serial.printf("%s %s %s\n", linka, ciel, odjazd);
   };
+  */
 
   return 0;
 }
