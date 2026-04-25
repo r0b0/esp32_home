@@ -40,7 +40,7 @@ int SocketIo::send(char engine_io_type, char socket_io_type, String payload) {
       data = data + payload;
     }
   }
-  Serial.printf("POSTing to %s: %s", url.c_str(), data.c_str());
+  Serial.printf("POSTing to %s: %s\n", url.c_str(), data.c_str());
   int ret = http.POST(data);
   if(ret != 200) {
     return -1;

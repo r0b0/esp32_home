@@ -21,6 +21,11 @@
 #include "hw.h"
 #include "gui.h"
 #include "weather.h"
+#include "mhd.h"
+
+#define DISPLAY_OFF_INTERVAL 60000
+#define MHD_ZASTAVKA 355
+#define MHD_NASTUPISTE "864"
 
 // Main app
 struct AppStruct app;
@@ -72,8 +77,8 @@ void create_main_gui(void) {
   lv_obj_add_event_cb(weather_btn, event_handler_weather_refresh, LV_EVENT_CLICKED, 0);
 
   app.bus_screen = gui_make_screen(LV_SYMBOL_BELL " Bus", LV_PALETTE_RED);
-  lv_obj_t *bus_label = lv_label_create(app.bus_screen->main_flex);
-  lv_label_set_text(bus_label, "Not implemented...");
+  app.bus_label = lv_label_create(app.bus_screen->main_flex);
+  lv_label_set_text(app.bus_label, "Loading...");
 }
 
 void connect_to_wifi() {
@@ -81,6 +86,19 @@ void connect_to_wifi() {
   unsigned long startAttempt = millis();
   while (WiFi.status() != WL_CONNECTED && millis() < startAttempt + 10000) {
     delay(500);
+  }
+}
+
+void update_mhd_gui(String linka, String ciel, String odjazd, bool is_first, bool is_last) {
+  static String temp_bus_label = String("");
+  String one_line = linka + String(" ") + ciel + String(" ") + odjazd;
+  if(is_first) {
+    temp_bus_label = one_line;
+    return;
+  }
+  temp_bus_label = temp_bus_label + String("\n") + one_line;
+  if(is_last) {
+    lv_label_set_text(app.bus_label, temp_bus_label.c_str());
   }
 }
 
@@ -99,6 +117,7 @@ void setup() {
   create_main_gui();
 
   fetch_weather();
+  mhd_connect(MHD_ZASTAVKA, MHD_NASTUPISTE, update_mhd_gui);
 
   app.ticker = millis();
   app.last_touch = millis();
@@ -108,7 +127,8 @@ void setup() {
 void loop_10s() {
   // LV_LOG_USER("tick %d", app.ticker);
   fetch_radio_status();
-  if(millis() > app.last_touch + 30000) {
+  mhd_loop();
+  if(millis() > app.last_touch + DISPLAY_OFF_INTERVAL) {
     turn_off();
   }
 }

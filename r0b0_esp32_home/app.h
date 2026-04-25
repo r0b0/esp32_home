@@ -19,6 +19,7 @@ struct AppStruct {
   struct AppScreen *weather_screen;
   lv_obj_t *weather_label;
   struct AppScreen *bus_screen;
+  lv_obj_t *bus_label;
   unsigned long ticker;
   bool turned_on;
   unsigned long last_touch;

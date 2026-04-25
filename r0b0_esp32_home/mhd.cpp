@@ -5,6 +5,7 @@
 #include "socketio.h"
 
 SocketIo socket_io(MHD_URL);
+handle_bus_f mhd_callback;
 
 void process_mhd_message(String message) {
   JsonDocument doc;
@@ -25,16 +26,20 @@ void process_mhd_message(String message) {
     Serial.printf(" zastavka %d nastupiste %d\n", zastavka, nastupiste);
 
     JsonArray tabula = tab["tab"].as<JsonArray>();
+    int i = 0;
     for(JsonObject bus: tabula) {
-      const char *linka = bus["linka"];
-      const char *ciel = bus["cielStr"];
-      const char *odjazd = bus["odjazd"];
-      Serial.printf("    %s %s %s\n", linka, ciel, odjazd);
+      String linka = bus["linka"];
+      String ciel = bus["cielStr"];
+      String odjazd = bus["odjazd"];
+      Serial.printf("    %s %s %s\n", linka.c_str(), ciel.c_str(), odjazd.c_str());
+      mhd_callback(linka, ciel, odjazd, i == 0, i == tabula.size()-1);
+      i++;
     }
   }
 }
 
-int mhd_connect() {
+int mhd_connect(int stop, String platform, handle_bus_f callback) {
+  mhd_callback = callback;
   int err;
   socket_io.set_event_callback(process_mhd_message);
   err = socket_io.connect("");
@@ -42,8 +47,9 @@ int mhd_connect() {
     Serial.printf("Socket connect failed: %d\n", err);
     return err;
   }
-
-  err = socket_io.send_event("[\"tabStart\",[355,[864],\"ba\"]]");
+  char tabStart[256];
+  sprintf(tabStart, "[\"tabStart\",[%d,[%s],\"ba\"]]", stop, platform);
+  err = socket_io.send_event(String(tabStart));
   if(err) {
     Serial.printf("Tabs start request failed: %d\n", err);
     return err;
