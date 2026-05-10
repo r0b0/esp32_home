@@ -14,7 +14,7 @@
 #include <WiFi.h>
 #include "wifi_creds.h"
 
-// Install the "HttpClient" library by Adrian McEwen
+#include <freertos/FreeRTOS.h>
 
 #include "app.h"
 #include "radio.h"
@@ -76,7 +76,7 @@ void create_main_gui(void) {
   lv_obj_align(weather_btn, LV_ALIGN_TOP_RIGHT, 0, 0);
   lv_obj_add_event_cb(weather_btn, event_handler_weather_refresh, LV_EVENT_CLICKED, 0);
 
-  app.bus_screen = gui_make_screen(LV_SYMBOL_BELL " Bus", LV_PALETTE_RED);
+  app.bus_screen = gui_make_screen(LV_SYMBOL_BELL " Bus Studenohorska", LV_PALETTE_RED);
   app.bus_label = lv_label_create(app.bus_screen->main_flex);
   lv_label_set_text(app.bus_label, "Loading...");
 }
@@ -102,6 +102,14 @@ void update_mhd_gui(String linka, String ciel, String odjazd, bool is_first, boo
   }
 }
 
+void mhd_loop_task(void *parameter) {
+  LV_LOG_USER("MHD loop task starting");
+  for(;;) {
+    mhd_loop();
+    vTaskDelay(1000 / portTICK_PERIOD_MS); // 1sec
+  }
+}
+
 void setup() {
   String LVGL_Arduino = String("LVGL Library Version: ") + lv_version_major() + "." + lv_version_minor() + "." + lv_version_patch();
   Serial.begin(115200);
@@ -117,7 +125,19 @@ void setup() {
   create_main_gui();
 
   fetch_weather();
-  mhd_connect(MHD_ZASTAVKA, MHD_NASTUPISTE, update_mhd_gui);
+  int ret = mhd_connect(MHD_ZASTAVKA, MHD_NASTUPISTE, update_mhd_gui);
+  if(ret) {
+    LV_LOG_USER("Failed to connect MHD");
+  } else {
+    xTaskCreate(
+      mhd_loop_task,            // code
+      "mhd_loop_task",          // name
+      10240,                    // stack depth
+      NULL,                     // param
+      1,                        // priority
+      &app.mhd_loop_task_handle // handle
+    );
+  }
 
   app.ticker = millis();
   app.last_touch = millis();
@@ -127,7 +147,7 @@ void setup() {
 void loop_10s() {
   // LV_LOG_USER("tick %d", app.ticker);
   fetch_radio_status();
-  mhd_loop();
+  
   if(millis() > app.last_touch + DISPLAY_OFF_INTERVAL) {
     turn_off();
   }

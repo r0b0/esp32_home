@@ -20,6 +20,7 @@ struct AppStruct {
   lv_obj_t *weather_label;
   struct AppScreen *bus_screen;
   lv_obj_t *bus_label;
+  TaskHandle_t mhd_loop_task_handle;
   unsigned long ticker;
   bool turned_on;
   unsigned long last_touch;
