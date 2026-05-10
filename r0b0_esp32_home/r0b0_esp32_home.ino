@@ -16,6 +16,7 @@
 
 #include <freertos/FreeRTOS.h>
 
+#include "lv_font_montserrat_cp1250.h"
 #include "app.h"
 #include "radio.h"
 #include "hw.h"
@@ -31,7 +32,10 @@
 struct AppStruct app;
 
 void create_main_gui(void) {
+  lv_style_init(&app.style);
+  lv_style_set_text_font(&app.style, &lv_font_montserrat_cp1250_14);
   app.main_screen = lv_obj_create(NULL);
+  lv_obj_add_style(app.main_screen, &app.style, 0);
   lv_screen_load(app.main_screen);
 
   lv_obj_t *wifi_conn_label = lv_label_create(app.main_screen);
@@ -42,6 +46,7 @@ void create_main_gui(void) {
   lv_obj_set_style_text_align(wifi_conn_label, LV_TEXT_ALIGN_CENTER, 0);
   
   app.radio_screen = gui_make_screen(LV_SYMBOL_AUDIO " Radio", LV_PALETTE_BLUE);
+  lv_obj_add_style(app.radio_screen->screen, &app.style, 0);
   app.radio_status_label = lv_label_create(app.radio_screen->main_flex);
   lv_label_set_long_mode(app.radio_status_label, LV_LABEL_LONG_MODE_SCROLL);
   lv_label_set_text(app.radio_status_label, "Loading...");
@@ -67,6 +72,7 @@ void create_main_gui(void) {
   lv_obj_align_to(stop_btn, play_btn, LV_ALIGN_OUT_RIGHT_MID, 10, 0);
 
   app.weather_screen = gui_make_screen(LV_SYMBOL_IMAGE " Weather", LV_PALETTE_LIME);
+  lv_obj_add_style(app.weather_screen->screen, &app.style, 0);
   app.weather_label = lv_label_create(app.weather_screen->main_flex);
   lv_label_set_text(app.weather_label, "Loading...");
   lv_obj_set_width(app.weather_label, LV_PCT(100));
@@ -76,7 +82,8 @@ void create_main_gui(void) {
   lv_obj_align(weather_btn, LV_ALIGN_TOP_RIGHT, 0, 0);
   lv_obj_add_event_cb(weather_btn, event_handler_weather_refresh, LV_EVENT_CLICKED, 0);
 
-  app.bus_screen = gui_make_screen(LV_SYMBOL_BELL " Bus Studenohorska", LV_PALETTE_RED);
+  app.bus_screen = gui_make_screen(LV_SYMBOL_BELL " Bus Studenohorská", LV_PALETTE_RED);
+  lv_obj_add_style(app.bus_screen->screen, &app.style, 0);
   app.bus_label = lv_label_create(app.bus_screen->main_flex);
   lv_label_set_text(app.bus_label, "Loading...");
 }

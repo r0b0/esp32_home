@@ -11,6 +11,7 @@ struct AppScreen {
 };
 
 struct AppStruct {
+  lv_style_t style;
   lv_obj_t *main_screen;
   lv_obj_t *main_screen_last_btn;
   struct AppScreen *radio_screen;

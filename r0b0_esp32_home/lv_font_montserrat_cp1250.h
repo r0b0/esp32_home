@@ -1,0 +1,4 @@
+extern const lv_font_t lv_font_montserrat_cp1250_14;
+extern const lv_font_t lv_font_montserrat_cp1250_20;
+extern const lv_font_t lv_font_montserrat_cp1250_30;
+extern const lv_font_t lv_font_montserrat_cp1250_40;

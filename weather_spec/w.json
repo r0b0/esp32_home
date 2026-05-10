@@ -1,0 +1,480 @@
+{
+    "data": {
+        "request": [
+            {
+                "type": "City",
+                "query": "Bratislava, Slovakia"
+            }
+        ],
+        "time_zone": [
+            {
+                "localtime": "2026-04-06 10:47",
+                "utcOffset": "2.0",
+                "zone": "Europe/Bratislava"
+            }
+        ],
+        "current_condition": [
+            {
+                "observation_time": "08:47 AM",
+                "localObsDateTime": "2026-04-06 10:47 AM",
+                "temp_C": "14",
+                "temp_F": "57",
+                "weatherCode": "113",
+                "weatherIconUrl": [
+                    {
+                        "value": "https://cdn.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0001_sunny.png"
+                    }
+                ],
+                "weatherDesc": [
+                    {
+                        "value": "Sunny"
+                    }
+                ],
+                "windspeedMiles": "19",
+                "windspeedKmph": "30",
+                "winddirDegree": "320",
+                "winddir16Point": "NW",
+                "precipMM": "0.0",
+                "precipInches": "0.0",
+                "humidity": "55",
+                "visibility": "10",
+                "visibilityMiles": "6",
+                "pressure": "1024",
+                "pressureInches": "30",
+                "cloudcover": "25",
+                "FeelsLikeC": "12",
+                "FeelsLikeF": "53",
+                "uvIndex": "2"
+            }
+        ],
+        "weather": [
+            {
+                "date": "2026-04-06",
+                "astronomy": [
+                    {
+                        "sunrise": "06:20 AM",
+                        "sunset": "07:29 PM",
+                        "moonrise": "No moonrise",
+                        "moonset": "07:42 AM",
+                        "moon_phase": "Waning Gibbous",
+                        "moon_illumination": "86"
+                    }
+                ],
+                "maxtempC": "16",
+                "maxtempF": "61",
+                "mintempC": "7",
+                "mintempF": "44",
+                "avgtempC": "12",
+                "avgtempF": "54",
+                "totalSnow_cm": "0.0",
+                "sunHour": "12.3",
+                "uvIndex": "1",
+                "hourly": [
+                    {
+                        "time": "0",
+                        "tempC": "13",
+                        "tempF": "55",
+                        "windspeedMiles": "7",
+                        "windspeedKmph": "12",
+                        "winddirDegree": "248",
+                        "winddir16Point": "WSW",
+                        "weatherCode": "176",
+                        "weatherIconUrl": [
+                            {
+                                "value": "https://cdn.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0025_light_rain_showers_night.png"
+                            }
+                        ],
+                        "weatherDesc": [
+                            {
+                                "value": "Patchy rain nearby"
+                            }
+                        ],
+                        "precipMM": "0.0",
+                        "precipInches": "0.0",
+                        "humidity": "78",
+                        "visibility": "10",
+                        "visibilityMiles": "6",
+                        "pressure": "1021",
+                        "pressureInches": "30",
+                        "cloudcover": "64",
+                        "HeatIndexC": "13",
+                        "HeatIndexF": "55",
+                        "DewPointC": "9",
+                        "DewPointF": "49",
+                        "WindChillC": "12",
+                        "WindChillF": "54",
+                        "WindGustMiles": "16",
+                        "WindGustKmph": "25",
+                        "FeelsLikeC": "12",
+                        "FeelsLikeF": "54",
+                        "chanceofrain": "83",
+                        "chanceofremdry": "0",
+                        "chanceofwindy": "0",
+                        "chanceofovercast": "83",
+                        "chanceofsunshine": "0",
+                        "chanceoffrost": "0",
+                        "chanceofhightemp": "0",
+                        "chanceoffog": "0",
+                        "chanceofsnow": "0",
+                        "chanceofthunder": "0",
+                        "uvIndex": "0",
+                        "shortRad": "0.0",
+                        "diffRad": "0.0"
+                    },
+                    {
+                        "time": "1200",
+                        "tempC": "14",
+                        "tempF": "57",
+                        "windspeedMiles": "18",
+                        "windspeedKmph": "29",
+                        "winddirDegree": "316",
+                        "winddir16Point": "NW",
+                        "weatherCode": "113",
+                        "weatherIconUrl": [
+                            {
+                                "value": "https://cdn.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0001_sunny.png"
+                            }
+                        ],
+                        "weatherDesc": [
+                            {
+                                "value": "Sunny"
+                            }
+                        ],
+                        "precipMM": "0.0",
+                        "precipInches": "0.0",
+                        "humidity": "53",
+                        "visibility": "10",
+                        "visibilityMiles": "6",
+                        "pressure": "1025",
+                        "pressureInches": "30",
+                        "cloudcover": "21",
+                        "HeatIndexC": "14",
+                        "HeatIndexF": "57",
+                        "DewPointC": "5",
+                        "DewPointF": "40",
+                        "WindChillC": "12",
+                        "WindChillF": "53",
+                        "WindGustMiles": "21",
+                        "WindGustKmph": "34",
+                        "FeelsLikeC": "12",
+                        "FeelsLikeF": "53",
+                        "chanceofrain": "0",
+                        "chanceofremdry": "88",
+                        "chanceofwindy": "0",
+                        "chanceofovercast": "0",
+                        "chanceofsunshine": "87",
+                        "chanceoffrost": "0",
+                        "chanceofhightemp": "0",
+                        "chanceoffog": "0",
+                        "chanceofsnow": "0",
+                        "chanceofthunder": "0",
+                        "uvIndex": "4",
+                        "shortRad": "505.4",
+                        "diffRad": "118.6"
+                    }
+                ]
+            },
+            {
+                "date": "2026-04-07",
+                "astronomy": [
+                    {
+                        "sunrise": "06:18 AM",
+                        "sunset": "07:31 PM",
+                        "moonrise": "12:49 AM",
+                        "moonset": "08:18 AM",
+                        "moon_phase": "Waning Gibbous",
+                        "moon_illumination": "79"
+                    }
+                ],
+                "maxtempC": "15",
+                "maxtempF": "58",
+                "mintempC": "4",
+                "mintempF": "40",
+                "avgtempC": "9",
+                "avgtempF": "48",
+                "totalSnow_cm": "0.0",
+                "sunHour": "13.0",
+                "uvIndex": "1",
+                "hourly": [
+                    {
+                        "time": "0",
+                        "tempC": "6",
+                        "tempF": "43",
+                        "windspeedMiles": "5",
+                        "windspeedKmph": "8",
+                        "winddirDegree": "326",
+                        "winddir16Point": "NW",
+                        "weatherCode": "113",
+                        "weatherIconUrl": [
+                            {
+                                "value": "https://cdn.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0008_clear_sky_night.png"
+                            }
+                        ],
+                        "weatherDesc": [
+                            {
+                                "value": "Clear "
+                            }
+                        ],
+                        "precipMM": "0.0",
+                        "precipInches": "0.0",
+                        "humidity": "63",
+                        "visibility": "10",
+                        "visibilityMiles": "6",
+                        "pressure": "1026",
+                        "pressureInches": "30",
+                        "cloudcover": "20",
+                        "HeatIndexC": "6",
+                        "HeatIndexF": "43",
+                        "DewPointC": "-0",
+                        "DewPointF": "31",
+                        "WindChillC": "4",
+                        "WindChillF": "40",
+                        "WindGustMiles": "10",
+                        "WindGustKmph": "17",
+                        "FeelsLikeC": "4",
+                        "FeelsLikeF": "40",
+                        "chanceofrain": "0",
+                        "chanceofremdry": "83",
+                        "chanceofwindy": "0",
+                        "chanceofovercast": "0",
+                        "chanceofsunshine": "87",
+                        "chanceoffrost": "0",
+                        "chanceofhightemp": "0",
+                        "chanceoffog": "0",
+                        "chanceofsnow": "0",
+                        "chanceofthunder": "0",
+                        "uvIndex": "0",
+                        "shortRad": "0.0",
+                        "diffRad": "0.0"
+                    },
+                    {
+                        "time": "1200",
+                        "tempC": "13",
+                        "tempF": "55",
+                        "windspeedMiles": "13",
+                        "windspeedKmph": "21",
+                        "winddirDegree": "322",
+                        "winddir16Point": "NW",
+                        "weatherCode": "113",
+                        "weatherIconUrl": [
+                            {
+                                "value": "https://cdn.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0001_sunny.png"
+                            }
+                        ],
+                        "weatherDesc": [
+                            {
+                                "value": "Sunny"
+                            }
+                        ],
+                        "precipMM": "0.0",
+                        "precipInches": "0.0",
+                        "humidity": "37",
+                        "visibility": "10",
+                        "visibilityMiles": "6",
+                        "pressure": "1024",
+                        "pressureInches": "30",
+                        "cloudcover": "6",
+                        "HeatIndexC": "13",
+                        "HeatIndexF": "55",
+                        "DewPointC": "-2",
+                        "DewPointF": "29",
+                        "WindChillC": "11",
+                        "WindChillF": "51",
+                        "WindGustMiles": "15",
+                        "WindGustKmph": "24",
+                        "FeelsLikeC": "11",
+                        "FeelsLikeF": "51",
+                        "chanceofrain": "0",
+                        "chanceofremdry": "94",
+                        "chanceofwindy": "0",
+                        "chanceofovercast": "0",
+                        "chanceofsunshine": "90",
+                        "chanceoffrost": "0",
+                        "chanceofhightemp": "0",
+                        "chanceoffog": "0",
+                        "chanceofsnow": "0",
+                        "chanceofthunder": "0",
+                        "uvIndex": "4",
+                        "shortRad": "530.8",
+                        "diffRad": "100.1"
+                    }
+                ]
+            },
+            {
+                "date": "2026-04-08",
+                "astronomy": [
+                    {
+                        "sunrise": "06:16 AM",
+                        "sunset": "07:32 PM",
+                        "moonrise": "01:48 AM",
+                        "moonset": "09:05 AM",
+                        "moon_phase": "Waning Gibbous",
+                        "moon_illumination": "70"
+                    }
+                ],
+                "maxtempC": "12",
+                "maxtempF": "53",
+                "mintempC": "2",
+                "mintempF": "35",
+                "avgtempC": "6",
+                "avgtempF": "43",
+                "totalSnow_cm": "0.0",
+                "sunHour": "13.0",
+                "uvIndex": "1",
+                "hourly": [
+                    {
+                        "time": "0",
+                        "tempC": "5",
+                        "tempF": "42",
+                        "windspeedMiles": "7",
+                        "windspeedKmph": "11",
+                        "winddirDegree": "339",
+                        "winddir16Point": "NNW",
+                        "weatherCode": "113",
+                        "weatherIconUrl": [
+                            {
+                                "value": "https://cdn.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0008_clear_sky_night.png"
+                            }
+                        ],
+                        "weatherDesc": [
+                            {
+                                "value": "Clear "
+                            }
+                        ],
+                        "precipMM": "0.0",
+                        "precipInches": "0.0",
+                        "humidity": "61",
+                        "visibility": "10",
+                        "visibilityMiles": "6",
+                        "pressure": "1024",
+                        "pressureInches": "30",
+                        "cloudcover": "0",
+                        "HeatIndexC": "6",
+                        "HeatIndexF": "42",
+                        "DewPointC": "-1",
+                        "DewPointF": "29",
+                        "WindChillC": "3",
+                        "WindChillF": "37",
+                        "WindGustMiles": "14",
+                        "WindGustKmph": "23",
+                        "FeelsLikeC": "3",
+                        "FeelsLikeF": "37",
+                        "chanceofrain": "0",
+                        "chanceofremdry": "87",
+                        "chanceofwindy": "0",
+                        "chanceofovercast": "0",
+                        "chanceofsunshine": "90",
+                        "chanceoffrost": "0",
+                        "chanceofhightemp": "0",
+                        "chanceoffog": "0",
+                        "chanceofsnow": "0",
+                        "chanceofthunder": "0",
+                        "uvIndex": "0",
+                        "shortRad": "0.0",
+                        "diffRad": "0.0"
+                    },
+                    {
+                        "time": "1200",
+                        "tempC": "10",
+                        "tempF": "50",
+                        "windspeedMiles": "14",
+                        "windspeedKmph": "22",
+                        "winddirDegree": "346",
+                        "winddir16Point": "NNW",
+                        "weatherCode": "113",
+                        "weatherIconUrl": [
+                            {
+                                "value": "https://cdn.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0001_sunny.png"
+                            }
+                        ],
+                        "weatherDesc": [
+                            {
+                                "value": "Sunny"
+                            }
+                        ],
+                        "precipMM": "0.0",
+                        "precipInches": "0.0",
+                        "humidity": "45",
+                        "visibility": "10",
+                        "visibilityMiles": "6",
+                        "pressure": "1027",
+                        "pressureInches": "30",
+                        "cloudcover": "11",
+                        "HeatIndexC": "10",
+                        "HeatIndexF": "50",
+                        "DewPointC": "-1",
+                        "DewPointF": "30",
+                        "WindChillC": "7",
+                        "WindChillF": "45",
+                        "WindGustMiles": "16",
+                        "WindGustKmph": "26",
+                        "FeelsLikeC": "7",
+                        "FeelsLikeF": "45",
+                        "chanceofrain": "0",
+                        "chanceofremdry": "92",
+                        "chanceofwindy": "0",
+                        "chanceofovercast": "0",
+                        "chanceofsunshine": "94",
+                        "chanceoffrost": "0",
+                        "chanceofhightemp": "0",
+                        "chanceoffog": "0",
+                        "chanceofsnow": "0",
+                        "chanceofthunder": "0",
+                        "uvIndex": "4",
+                        "shortRad": "548.9",
+                        "diffRad": "92.8"
+                    }
+                ]
+            }
+        ],
+        "alerts": {
+            "alert": [
+                {
+                    "headline": "Očakávame nočný mráz až do -2 °C, ktorý môže poškodiť vegetáciu, predovšetkým ovocné stromy, vinnú révu a zeleninu.",
+                    "msgtype": "Update",
+                    "severity": "Moderate",
+                    "urgency": "Future",
+                    "areas": "Bratislava",
+                    "category": "Met",
+                    "certainty": "Likely",
+                    "event": "Výstraha pred prízemným mrazom vo vegetačnom období",
+                    "note": "",
+                    "effective": "2026-04-05T08:39:00-00:00",
+                    "expires": "2026-04-07T05:00:00-00:00",
+                    "desc": "V okrese Bratislava sa OJEDINELE očakáva mráz v 2 m nad povrchom, ktorý\npredstavuje ohrozenie pre vegetáciu.\nVo výške 5 cm nad povrchom sa očakáva dosiahnutie minimálnej\nteploty vzduchu 0 - -2 °C.\n\nOčakávaný mráz nie je v danej ročnej dobe a oblasti zriedkavý,\nale môže poškodiť vegetáciu.",
+                    "instruction": "ZVÝŠTE POZORNOSŤ, sledujte najčerstvejšie predpovede počasia.\nOčakávajte menšie obmedzenia aktivít vonku."
+                },
+                {
+                    "headline": "Očakávame nočný mráz až do -2 °C, ktorý môže poškodiť vegetáciu, predovšetkým ovocné stromy, vinnú révu a zeleninu.",
+                    "msgtype": "Update",
+                    "severity": "Moderate",
+                    "urgency": "Future",
+                    "areas": "Pezinok",
+                    "category": "Met",
+                    "certainty": "Likely",
+                    "event": "Výstraha pred prízemným mrazom vo vegetačnom období",
+                    "note": "",
+                    "effective": "2026-04-05T08:39:00-00:00",
+                    "expires": "2026-04-07T05:00:00-00:00",
+                    "desc": "V okrese Pezinok sa OJEDINELE očakáva mráz v 2 m nad povrchom, ktorý\npredstavuje ohrozenie pre vegetáciu.\nVo výške 5 cm nad povrchom sa očakáva dosiahnutie minimálnej\nteploty vzduchu 0 - -2 °C.\n\nOčakávaný mráz nie je v danej ročnej dobe a oblasti zriedkavý,\nale môže poškodiť vegetáciu.",
+                    "instruction": "ZVÝŠTE POZORNOSŤ, sledujte najčerstvejšie predpovede počasia.\nOčakávajte menšie obmedzenia aktivít vonku."
+                },
+                {
+                    "headline": "Očakávame nočný mráz až do -2 °C, ktorý môže poškodiť vegetáciu, predovšetkým ovocné stromy, vinnú révu a zeleninu.",
+                    "msgtype": "Update",
+                    "severity": "Moderate",
+                    "urgency": "Future",
+                    "areas": "Malacky",
+                    "category": "Met",
+                    "certainty": "Likely",
+                    "event": "Výstraha pred prízemným mrazom vo vegetačnom období",
+                    "note": "",
+                    "effective": "2026-04-05T08:39:00-00:00",
+                    "expires": "2026-04-07T05:00:00-00:00",
+                    "desc": "V okrese Malacky sa OJEDINELE očakáva mráz v 2 m nad povrchom, ktorý\npredstavuje ohrozenie pre vegetáciu.\nVo výške 5 cm nad povrchom sa očakáva dosiahnutie minimálnej\nteploty vzduchu 0 - -2 °C.\n\nOčakávaný mráz nie je v danej ročnej dobe a oblasti zriedkavý,\nale môže poškodiť vegetáciu.",
+                    "instruction": "ZVÝŠTE POZORNOSŤ, sledujte najčerstvejšie predpovede počasia.\nOčakávajte menšie obmedzenia aktivít vonku."
+                }
+            ]
+        }
+    }
+}
